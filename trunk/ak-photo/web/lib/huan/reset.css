@@ -1,0 +1,23 @@
+html {
+	color: #000;
+	background-color: #FFF;
+}
+
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+
+fieldset,
+img {
+	border: 0;
+}
+
+ul, ol, dl {
+	margin: 1em 1em 1em 2em;
+	padding: 0;
+}
+
+blockquote {
+	margin: 1em;
+}
