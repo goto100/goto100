@@ -1,0 +1,120 @@
+@import url("../lib/huan/reset.css");
+
+html {
+	background-color: #00A0DE;
+}
+body {
+	width: 950px;
+	margin: 0 auto;
+	padding: 0;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	background: url(res/bg.png) #FFF no-repeat bottom left;
+}
+div.box {
+	clear: both;
+}
+
+#header {
+	height: 300px;
+	background-color: #00A0DE;
+}
+	#sitenav {
+		float: left;
+	}
+	#promotion {
+	}
+	#myCart {
+		margin-top: 10px;
+	}
+#content {
+	min-height: 200px;
+	padding: 16px;
+	clear: both;
+}
+#footer {
+	height: 66px;
+}
+#footer ul {
+	margin-left: 140px;
+}
+#footer li {
+	display: inline;
+	float: left;
+	padding-left: 14px;
+	background: url(res/blue-point.png) no-repeat center left;
+}
+#footer p {
+	clear: both;
+	margin-left: 140px;
+}
+
+
+
+#index #content {
+	padding-top: 80px;
+	background: url(res/print-content-bg.png) no-repeat 20px top;
+}
+#index #intro {
+}
+#index #intro p {
+	line-height: 1.8em;
+}
+#index #price {
+	float: right;
+	width: 186px;
+	height: 144px;
+	margin-top: -170px;
+	padding: 41px 10px 10px 14px;
+	background: url(res/index-price.png) no-repeat center center;
+}
+#index #price h2 {
+	display: none;
+}
+#index #price img {
+	float: right;
+	margin-top: -26px;
+}
+#index #price li {
+	margin-bottom: 3px;
+	padding: 0 10px;
+	color: #996633;
+	font-size: 13px;
+	line-height: 33px;
+	background-color: #E9E9E9;
+}
+#index #promotion-2 li,
+#index #promotion-3 li,
+#index #promotion-4 p {
+	list-style-type: square;
+	line-height: 1.4em;
+}
+#index #promotion-2 {
+	float: left;
+	width: 160px;
+	height: 110px;
+	margin-right: 20px;
+	padding: 80px 10px 10px 167px;
+	background: url(res/index-promotion-2.png) no-repeat center center;
+}
+#index #promotion-3 {
+	float: left;
+	width: 160px;
+	height: 110px;
+	padding: 80px 10px 10px 167px;
+	background: url(res/index-promotion-3.png) no-repeat center center;
+}
+#index #promotion-4 {
+	float: right;
+	width: 160px;
+	height: 110px;
+	padding: 80px 20px 10px 31px;
+	background: url(res/index-promotion-4.png) no-repeat center center;
+}
+#index #promotion-help {
+	width: 160px;
+	height: 110px;
+	padding: 80px 10px 10px 167px;
+	background: url(res/index-promotion-help.png) no-repeat center center;
+}
+
