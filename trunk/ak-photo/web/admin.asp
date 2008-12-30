@@ -2,7 +2,8 @@
 <!--#include file="lib/js-asp/modules/dao/CategoryDao.asp" -->
 <!--#include file="lib/ak-photo/category.asp" -->
 <script language="javascript" runat="server">
-controller.add("category").doGet = (function() {
+
+controller.add("category", Action).action = function() {
 	var category = site.getCategory(null, true);
 	var showCategory = function(category) {
 		if (!category.length) return;
@@ -15,21 +16,24 @@ controller.add("category").doGet = (function() {
 		write("</ul>");
 	}
 	showCategory(category);
-}).bind(new Action);
+}
 
-controller.add("category/add").doGet = function() {
-	showCategoryForm();
+controller.add(/category\/\d+?\/edit/ig, FormAction).action = function() {
+	var category = site.getCategory(this.search.path[1]);
+	showCategoryForm(category);
+}
+
+controller.add("category", PostAction).action = function() {
+	
 }
 
 controller.execute();
 </script>
 <%
-function showCategoryForm() {
+function showCategoryForm(category) {
 %>
-<form action="admin.asp?category" method="post">
-	<input type="hidden" name="__method__" value="put" />
-
-	
+<form action="admin.asp?category/<%=category.id%>" method="post">
+	<input type="text" name="name" value="<%=category.name%>" />
 </form>
 <%
 }
