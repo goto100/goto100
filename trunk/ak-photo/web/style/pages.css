@@ -1,0 +1,41 @@
+#help #content {
+	width: 640px;
+}
+#help h2 {
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 3em;
+	color: #393;
+}
+#help table {
+	width: 100%;
+	border-top: 1px solid #7EAB3F;
+	border-left: 1px solid #7EAB3F;
+}
+#help thead {
+	color: #FFF;
+	background-color: #7EAB3F;
+}
+#help th {
+	text-align: center;
+	font-weight: bold;
+}
+#help th, td {
+	padding: 6px 15px;
+	border-right: 1px solid #7EAB3F;
+	border-bottom: 1px solid #7EAB3F;
+}
+#help #help-note {
+	height: 40px;
+	padding: 11px 10px;
+	margin-top: 10px;
+	color: #393;
+	background: url(res/help-note.png) no-repeat center center;
+}
+#help #help-note p {
+	line-height: 20px;
+}
+#help #help-note p.phone {
+	padding-left: 20px;
+	background:url(res/phone.png) no-repeat left center;
+}

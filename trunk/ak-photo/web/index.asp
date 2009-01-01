@@ -1,24 +1,14 @@
-<%@LANGUAGE="VBSCRIPT" CODEPAGE="65001"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
+<!--#include file="common.asp" -->
+<!--#include file="template.asp" -->
+<%
+var page = new Page();
+page.template = template;
+page.id = "index";
+page.styles.push("index");
 
-<script type="text/javascript" src="lib/swfobject/swfobject.js"></script>
-<script type="text/javascript">
-swfobject.embedSWF("res/akHeader.swf", "sitenav", "766", "300", "9.0.0");
-</script>
-<link href="lib/huan/reset.css" rel="stylesheet" type="text/css" />
-<link href="style/default.css" rel="stylesheet" type="text/css" />
-</head>
-
-<body id="index">
-<div id="header">
-	<div id="sitenav"></div>
-	<img id="promotion" src="res/promotion.png" />
-	<a href="cart.asp"><img id="myCart" src="res/myCart.png" /></a>
-</div>
+page.output = function() {
+%>
+<%this.show("header")%>
 <div id="main">
 	<div id="content">
 		<div class="box">
@@ -70,34 +60,35 @@ swfobject.embedSWF("res/akHeader.swf", "sitenav", "766", "300", "9.0.0");
 		<div class="box">
 			<div id="promotion-help">
 				<ul>
-					<li>高档内彩、边彩马克杯</li>
-					<li>高级水晶照片摆台</li>
-					<li>个性白T恤、黑T恤、彩领T恤</li>
-					<li>个性徽章、随意贴</li>
-					<li>专属炫酷鼠标垫</li>
+					<li><a href="#">冲印流程</a></li>
+					<li><a href="#">礼品订制流程</a></li>
+					<li><a href="#">送货收货</a></li>
+					<li><a href="#">派送范围</a></li>
+					<li><a href="#">更多帮助</a></li> 
 				</ul>
 				<ul>
-					<li>高档内彩、边彩马克杯</li>
-					<li>高级水晶照片摆台</li>
-					<li>个性白T恤、黑T恤、彩领T恤</li>
-					<li>个性徽章、随意贴</li>
-					<li>专属炫酷鼠标垫</li>
+					<li><a href="#">冲印价格</a></li>
+					<li><a href="#">礼品订制价格</a></li>
+					<li><a href="#">送货收货费用</a></li>
+					<li><a href="#">超范围运费</a></li>
+					<li><a href="#">更多帮助</a></li> 
 				</ul>
 			</div>
 		</div>
+		<div id="partners">
+			<ul>
+				<li><a href="#"><img src="res/partners/color-gl.png" /></a></li>
+				<li><a href="#"><img src="res/partners/cuphoto.png" /></a></li>
+				<li><a href="#"><img src="res/partners/hjwx.png" /></a></li>
+				<li><a href="#"><img src="res/partners/akrc.png" /></a></li>
+				<li><a href="#"><img src="res/partners/ankang.png" /></a></li>
+			</ul>
+		</div>
 	</div>
 </div>
-<div id="footer">
-	<ul>
-		<li><a href="index.asp">网站首页</a></li>
-		<li><a href="print.asp">冲印相片</a></li>
-		<li><a href="gifts.asp">影像礼品</a></li>
-		<li><a href="bbs/index.asp">旋影论坛</a></li>
-		<li><a href="help.asp">帮助中心</a></li>
-		<li><a href="about.asp">关于我们</a></li>
-		<li><a href="#" onclick="var strHref=window.location.href;this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.ak-photo.cn/');return false;">加入首页</a></li>
-	</ul>
-	<p>ak-photo.cn @ 2008 陕ICP备06052762</p>
-</div>
-</body>
-</html>
+<%this.show("footer")%>
+<%}
+%>
+<script language="javascript" runat="server">
+page.output();
+</script>

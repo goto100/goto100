@@ -15,6 +15,70 @@ div.box {
 	clear: both;
 }
 
+h1 {
+	display: inline-block;
+	margin-left: 80px;
+	margin-right: 10px;
+	padding: 0 15px;
+	line-height: 44px;
+	font-size: 14px;
+	font-weight: bold;
+	color: #FFF;
+	background-color: #BBD965;
+}
+ul.navbar,
+dl.navbar {
+	display: inline-block;
+	padding: 0 40px;
+	line-height: 44px;
+	font-size: 14px;
+	background-color: #EAFCB5;
+}
+dl.navbar dt {
+	display: inline-block;
+	margin-right: 20px;
+}
+ul.navbar li,
+dl.navbar dd {
+	display: inline-block;
+	margin-right: 20px;
+}
+
+div.navmenu {
+	width: 224px;
+	margin-bottom: 100px;
+	background: url(res/greenbox.png) no-repeat center top;
+}
+div.navmenu h2 {
+	line-height: 44px;
+	text-align: center;
+	color: #FFF;
+	font-size: 16px;
+	font-weight: bold;
+	letter-spacing: 0.5em;
+}
+div.navmenu dl {
+	padding: 30px 10px;
+	background: url(res/greenbox.png) no-repeat center bottom;
+}
+div.navmenu dt {
+	padding-left: 16px;
+	color: #339933;
+	font-size: 14px;
+	line-height: 1.4em;
+	background: url(res/green_sub_bullet.png) no-repeat left center;
+}
+div.navmenu dd {
+	margin-left: 16px;
+	display: list-item;
+	line-height: 1.4em;
+	list-style-type: square;
+	list-style-position: inside;
+}
+div.navmenu dd a {
+	color: #000;
+}
+
 #header {
 	height: 300px;
 	background-color: #00A0DE;
@@ -27,94 +91,45 @@ div.box {
 	#myCart {
 		margin-top: 10px;
 	}
+#main {
+	padding: 25px;
+	overflow: hidden;
+}
+#sidebar {
+	float: left;
+}
 #content {
+	float: right;
+	width: 900px;
 	min-height: 200px;
-	padding: 16px;
-	clear: both;
 }
 #footer {
-	height: 66px;
+	height: 50px;
+	padding-top: 16px;
 }
 #footer ul {
 	margin-left: 140px;
 }
 #footer li {
-	display: inline;
-	float: left;
-	padding-left: 14px;
+	display: inline-block;
+	padding: 0 14px;
 	background: url(res/blue-point.png) no-repeat center left;
+}
+* html #footer li {
+	display: inline;
+}
+*+html #footer li {
+	display: inline;
+}
+#footer a {
+	text-decoration: none;
+	color: #FFF;
 }
 #footer p {
 	clear: both;
-	margin-left: 140px;
+	margin: 10px 0 0 140px;
+	color: #FFF;
 }
 
 
-
-#index #content {
-	padding-top: 80px;
-	background: url(res/print-content-bg.png) no-repeat 20px top;
-}
-#index #intro {
-}
-#index #intro p {
-	line-height: 1.8em;
-}
-#index #price {
-	float: right;
-	width: 186px;
-	height: 144px;
-	margin-top: -170px;
-	padding: 41px 10px 10px 14px;
-	background: url(res/index-price.png) no-repeat center center;
-}
-#index #price h2 {
-	display: none;
-}
-#index #price img {
-	float: right;
-	margin-top: -26px;
-}
-#index #price li {
-	margin-bottom: 3px;
-	padding: 0 10px;
-	color: #996633;
-	font-size: 13px;
-	line-height: 33px;
-	background-color: #E9E9E9;
-}
-#index #promotion-2 li,
-#index #promotion-3 li,
-#index #promotion-4 p {
-	list-style-type: square;
-	line-height: 1.4em;
-}
-#index #promotion-2 {
-	float: left;
-	width: 160px;
-	height: 110px;
-	margin-right: 20px;
-	padding: 80px 10px 10px 167px;
-	background: url(res/index-promotion-2.png) no-repeat center center;
-}
-#index #promotion-3 {
-	float: left;
-	width: 160px;
-	height: 110px;
-	padding: 80px 10px 10px 167px;
-	background: url(res/index-promotion-3.png) no-repeat center center;
-}
-#index #promotion-4 {
-	float: right;
-	width: 160px;
-	height: 110px;
-	padding: 80px 20px 10px 31px;
-	background: url(res/index-promotion-4.png) no-repeat center center;
-}
-#index #promotion-help {
-	width: 160px;
-	height: 110px;
-	padding: 80px 10px 10px 167px;
-	background: url(res/index-promotion-help.png) no-repeat center center;
-}
 
