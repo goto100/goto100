@@ -1,4 +1,7 @@
-<%@LANGUAGE="VBSCRIPT" CODEPAGE="65001"%>
+<%
+var template = {};
+template.header = function() {
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -7,29 +10,28 @@
 
 <script type="text/javascript" src="lib/swfobject/swfobject.js"></script>
 <script type="text/javascript">
-swfobject.embedSWF("res/akHeader.swf", "sitenav", "766", "300", "9.0.0");  
+swfobject.embedSWF("res/akHeader.swf", "sitenav", "766", "300", "9.0.0");
 </script>
 <link href="lib/huan/reset.css" rel="stylesheet" type="text/css" />
 <link href="style/default.css" rel="stylesheet" type="text/css" />
+<%
+this.styles.forEach(function(style) {
+	%><link href="style/<%=style%>.css" rel="stylesheet" type="text/css" /><%
+});
+%>
 </head>
 
-<body id="print">
+<body id="<%=this.id%>">
 <div id="header">
 	<div id="sitenav"></div>
-	<div id="promotion"></div>
+	<img id="promotion" src="res/promotion.png" />
+	<a href="cart.asp"><img id="myCart" src="res/myCart.png" /></a>
 </div>
-<div id="main">
-	<div id="content">
-		<h1>完成</h1>
-		<ul id="nav">
-			<li>上传相片</li>
-			<li>设置数量和尺寸</li>
-			<li>填写配送信息</li>
-			<li>确认订单</li>
-			<li>完成</li>
-		</ul>
-	</div>
-</div>
+<%
+}
+
+template.footer = function() {
+%>
 <div id="footer">
 	<ul>
 		<li><a href="index.asp">网站首页</a></li>
@@ -44,3 +46,6 @@ swfobject.embedSWF("res/akHeader.swf", "sitenav", "766", "300", "9.0.0");
 </div>
 </body>
 </html>
+<%
+}
+%>

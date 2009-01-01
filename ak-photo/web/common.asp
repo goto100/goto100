@@ -2,6 +2,7 @@
 <!--#include file="lib/js-asp/mvc.asp" -->
 <!--#include file="lib/js-asp/db/DBAccess.asp" -->
 <!--#include file="lib/ak-photo/Site.asp" -->
+<!--#include file="lib/js-asp/view/Page.asp" -->
 <script language="javascript" runat="server">
 
 Response.Buffer = true;
@@ -14,7 +15,7 @@ Session.CodePage = 65001;
 // Session.CodePage = 936;
 
  Response.Charset = "utf-8";
-//Response.Charset = "gb2312";
+// Response.Charset = "gb2312";
 
 
 MAIN_DB_PATH = Server.MapPath("/ak-photo/db/site.mdb");

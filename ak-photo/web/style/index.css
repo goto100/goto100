@@ -1,0 +1,86 @@
+#content {
+	padding-top: 80px;
+	background: url(res/print-content-bg.png) no-repeat 20px top;
+}
+#intro {
+}
+#intro p {
+	line-height: 1.8em;
+}
+#price {
+	float: right;
+	width: 186px;
+	height: 144px;
+	margin-top: -170px;
+	padding: 41px 10px 10px 14px;
+	background: url(res/index-price.png) no-repeat center center;
+}
+#price h2 {
+	display: none;
+}
+#price img {
+	float: right;
+	margin-top: -26px;
+}
+#price li {
+	margin-bottom: 3px;
+	padding: 0 10px;
+	color: #996633;
+	font-size: 13px;
+	line-height: 33px;
+	background-color: #E9E9E9;
+}
+#promotion-2 li,
+#promotion-3 li,
+#promotion-4 p {
+	list-style-type: square;
+	line-height: 1.4em;
+}
+#promotion-2 {
+	float: left;
+	width: 160px;
+	height: 110px;
+	margin-right: 10px;
+	padding: 80px 10px 10px 167px;
+	background: url(res/index-promotion-2.png) no-repeat center center;
+}
+#promotion-3 {
+	float: left;
+	width: 160px;
+	height: 110px;
+	padding: 80px 10px 10px 167px;
+	background: url(res/index-promotion-3.png) no-repeat center center;
+}
+#promotion-4 {
+	float: right;
+	width: 160px;
+	height: 110px;
+	padding: 80px 20px 10px 31px;
+	background: url(res/index-promotion-4.png) no-repeat center center;
+}
+#promotion-help {
+	width: 320px;
+	height: 110px;
+	padding: 80px 10px 10px 7px;
+	background: url(res/index-promotion-help.png) no-repeat center center;
+}
+#promotion-help ul {
+	float: left;
+	width: 80px;
+	padding: 0 10px 0 70px;
+}
+#partners {
+	width: 760px;
+	height: 60px;
+	margin-left: 110px;
+	padding: 10px 10px 10px 50px;
+	background: url(res/index-partners.png) no-repeat left top;	
+}
+#partners li {
+	display: inline;
+	line-height: 60px;
+	margin-right: 20px;
+}
+#partners li img {
+	vertical-align: middle;
+}
