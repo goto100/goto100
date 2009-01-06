@@ -54,7 +54,7 @@ template.category = function(category) {
 	if (!category.length) return;
 	%><ul><%
 	category.forEach(function(category) {
-		%><li><%=category.name%></li><%
+		%><li><a href="?<%=category.id%>"><%=category.name%></a></li><%
 		template.category(category);
 	});
 	%></ul><%
