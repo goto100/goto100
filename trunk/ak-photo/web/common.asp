@@ -20,9 +20,8 @@ Session.CodePage = 65001;
 
 MAIN_DB_PATH = Server.MapPath("/ak-photo/db/site.mdb");
 NAMESPACE = "ak";
-
+UPLOAD_PATH = Server.MapPath("/ak-photo/web/_uploads/");
 var site = new Site();
 site.load();
-
 var controller = new Controller();
 </script>

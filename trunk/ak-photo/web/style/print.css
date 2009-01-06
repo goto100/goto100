@@ -1,0 +1,15 @@
+h1 {
+	background-color: #FAAA3B;
+}
+ol.navbar {
+	background-color: #F7D9AA;
+}
+
+ol.steps li {
+	height: 25px;
+	line-height: 25px;
+	margin: 9px 20px 10px 0;
+	padding-left: 34px;
+	background-image: url(res/orange-steps.png);
+	background-repeat: no-repeat;
+}
