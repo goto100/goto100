@@ -1,10 +1,10 @@
-<!--#include file="../js-asp/dao/Dao.asp" -->
+<!--#include file="../js-asp/dao/DAO.asp" -->
 <script language="javascript" runat="server">
-function SettingDao() {
+function SettingDAO() {
 	this.table = "Setting";
 }
 
-SettingDao.toPojo = function(record) {
+SettingDAO.toPojo = function(record) {
 	var category = new Category();
 	category.id = record.get("id");
 	var parentId = record.get("parentId");
@@ -14,7 +14,7 @@ SettingDao.toPojo = function(record) {
 	return category;
 }
 
-SettingDao.fromPojo = function(category) {
+SettingDAO.fromPojo = function(category) {
 	var record = {};
 	if (category.parent) record.parentId = category.parent.id;
 	record.name = category.name;
@@ -22,9 +22,9 @@ SettingDao.fromPojo = function(category) {
 	return new Map(record);
 }
 
-SettingDao.prototype = new Dao();
+SettingDAO.prototype = new DAO();
 
-SettingDao.prototype.get = function(name) {
+SettingDAO.prototype.get = function(name) {
 	var record = this.db.query("SELECT " + name + " FROM " + this.table, 1);
 	return record.get(name);
 }

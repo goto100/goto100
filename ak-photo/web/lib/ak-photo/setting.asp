@@ -1,18 +1,18 @@
-<!--#include file="SettingDao.asp" -->
+<!--#include file="SettingDAO.asp" -->
 <script language="javascript" runat="server">
-Site.prototype._settingDao = null;
+Site.prototype._settingDAO = null;
 
-Site.prototype.getSettingDao = function() {
-	if (!this._settingDao) {
-		this._settingDao = new SettingDao();
-		this._settingDao.db = this.db;
-		this._settingDao.table = "site_Setting";
+Site.prototype.getSettingDAO = function() {
+	if (!this._settingDAO) {
+		this._settingDAO = new SettingDAO();
+		this._settingDAO.db = this.db;
+		this._settingDAO.table = "site_Setting";
 	}
-	return this._settingDao;
+	return this._settingDAO;
 }
 
 Site.prototype.loginAdmin = function(input) {
-	var dao = this.getSettingDao();
+	var dao = this.getSettingDAO();
 	var password = dao.get("adminPassword");
 	if (input == password) {
 		this.adminLoggedIn = true;
