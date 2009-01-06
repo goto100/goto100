@@ -1,3 +1,4 @@
+<!--#include file="../js-asp/modules/dao/CategoryDao.asp" -->
 <script language="javascript" runat="server">
 Site.prototype._categoryDao = null;
 

@@ -14,9 +14,9 @@ body {
 div.box {
 	clear: both;
 }
-
 h1 {
 	display: inline-block;
+	margin-top: 10px;
 	margin-left: 80px;
 	margin-right: 10px;
 	padding: 0 15px;
@@ -26,11 +26,12 @@ h1 {
 	color: #FFF;
 	background-color: #BBD965;
 }
-ul.navbar,
-dl.navbar {
+ul.navbar, ol.navbar, dl.navbar {
 	display: inline-block;
-	padding: 0 40px;
+	vertical-align: top;
 	line-height: 44px;
+	margin-top: 10px;
+	padding: 0 40px;
 	font-size: 14px;
 	background-color: #EAFCB5;
 }
@@ -38,8 +39,7 @@ dl.navbar dt {
 	display: inline-block;
 	margin-right: 20px;
 }
-ul.navbar li,
-dl.navbar dd {
+ul.navbar li, ol.navbar li, dl.navbar dd {
 	display: inline-block;
 	margin-right: 20px;
 }
@@ -133,3 +133,35 @@ div.navmenu dd a {
 
 
 
+
+
+ol.steps li.step_1 {
+	background-position: 0 0;
+}
+ol.steps li.step_2 {
+	background-position: 0 -50px;
+}
+ol.steps li.step_3 {
+	background-position: 0 -100px;
+}
+ol.steps li.step_4 {
+	background-position: 0 -150px;
+}
+ol.steps li.step_5 {
+	background-position: 0 -200px;
+}
+ol.step_1 li.step_1 {
+	background-position: 0 -25px;
+}
+ol.step_2 li.step_2 {
+	background-position: 0 -75px;
+}
+ol.step_3 li.step_3 {
+	background-position: 0 -125px;
+}
+ol.step_4 li.step_4 {
+	background-position: 0 -175px;
+}
+ol.step_5 li.step_5 {
+	background-position: 0 -225px;
+}

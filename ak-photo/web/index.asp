@@ -1,5 +1,5 @@
 <!--#include file="common.asp" -->
-<!--#include file="template.asp" -->
+<!--#include file="templates/default.asp" -->
 <%
 var page = new Page();
 page.template = template;

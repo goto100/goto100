@@ -1,11 +1,15 @@
-<!--#include file="../common.asp" -->
-<!--#include file="../lib/js-asp/modules/dao/CategoryDao.asp" -->
+<!--#include file="common.asp" -->
 <!--#include file="../lib/ak-photo/category.asp" -->
+<!--#include file="../templates/admin.asp" -->
 <script language="javascript" runat="server">
+if (!site.adminLoggedIn) Response.End();
+
 
 controller.add(null, Action).action = function() {
 	var category = site.getCategory(null, true);
-	showCategory(category);
+	var page = new Page();
+	page.template = adminTemplate;
+	page.show("category", category);
 }
 
 controller.add(null, PutAction).action = function() {
@@ -43,6 +47,7 @@ controller.add(/\d+?/ig, DeleteAction).action = function() {
 
 controller.execute();
 </script>
+
 <%
 function showCategoryForm(category, allCategory) {
 %>
@@ -70,13 +75,4 @@ function showCategoryOption(category, prefix) {
 	});
 }
 
-function showCategory(category) {
-	if (!category.length) return;
-	%><ul><%
-	category.forEach(function(category) {
-		%><li><%=category.name%><a href="?<%=category.id%>/edit">edit</a><form action="category.asp?<%=category.id%>" method="post"><button name="__method__" value="delete">删除</button></form><form action="category.asp?<%=category.id%>" method="post"><button name="move" value="up">上移</button></form><form action="category.asp?<%=category.id%>" method="post"><button name="move" value="down">下移</button></form></li><%
-		showCategory(category);
-	});
-	%></ul><%
-}
 %>

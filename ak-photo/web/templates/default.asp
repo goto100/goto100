@@ -41,6 +41,7 @@ template.footer = function() {
 		<li><a href="help.asp">帮助中心</a></li>
 		<li><a href="about.asp">关于我们</a></li>
 		<li><a href="#" onclick="var strHref=window.location.href;this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.ak-photo.cn/');return false;">加入首页</a></li>
+		<li><a href="admin">后台管理</a></li>
 	</ul>
 	<p>ak-photo.cn @ 2008 陕ICP备06052762</p>
 </div>
@@ -48,4 +49,15 @@ template.footer = function() {
 </html>
 <%
 }
+
+template.category = function(category) {
+	if (!category.length) return;
+	%><ul><%
+	category.forEach(function(category) {
+		%><li><%=category.name%></li><%
+		template.category(category);
+	});
+	%></ul><%
+}
+
 %>
