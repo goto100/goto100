@@ -1,6 +1,9 @@
 h1 {
 	background-color: #3CBBE9;
 }
+div.box {
+	margin: 10px auto;
+}
 ol.navbar {
 	background-color: #C5E1F9;
 }
@@ -11,4 +14,84 @@ ol.steps li {
 	padding-left: 34px;
 	background-image: url(res/green-steps.png);
 	background-repeat: no-repeat;
+}
+h3 {
+	color: #3CBBE9;
+	font-weight: bold;
+	font-size: 14px;
+}
+#gift-description {
+	display: inline-block;
+	width: 460px;
+}
+#gift-description div.thumb {
+	text-align: center;
+}
+#gift-description-more {
+	display: inline-block;
+	width: 380px;
+	vertical-align: top;
+}
+#gifts h2 {
+	display: inline-block;
+	width: 850px;
+	height: 35px;
+	padding-left: 50px;
+	line-height: 35px;
+	font-weight: bold;
+	font-size: 14px;
+	color: #00A0DE;
+	background-color: #C5E1F9;
+	background-image: url(res/green-steps.png);
+	background-repeat: no-repeat;
+}
+* html #gifts h2 {display: inline;}
+*+html #gifts h2 {display: inline;}
+#gift-select-style h2 {
+	background-position: 10px -45px;
+}
+#gift-buy-count h2 {
+	background-position: 10px -145px;
+}
+#gift-upload-photo h2 {
+	background-position: 10px -245px;
+}
+#gift-buy-submit h2 {
+	background-position: 10px -345px;
+}
+#gift-buy-count label {
+	display: inline-block;
+	margin-left: -600px;
+}
+* html #gift-buy-count label {display: inline;}
+*+html #gift-buy-count label {display: inline;}
+
+#gift-upload-photo div.upload {
+	display: inline-block;
+	margin-left: -600px;
+}
+* html #gift-upload-photo div.upload {display: inline;}
+*+html #gift-upload-photo div.upload {display: inline;}
+#gift-upload-photo div.upload p {
+	display: inline;
+}
+#gift-buy-submit h2 {
+	width: 500px;
+}
+#gift-buy-submit div.submit {
+	display: inline-block;
+	width: 340px;
+	text-align: right;
+}
+* html #gift-buy-submit div.submit {display: inline;}
+*+html #gift-buy-submit div.submit {display: inline;}
+#gift-buy-submit div.submit p {
+	display: inline;
+}
+#gift-buy-submit div.submit input {
+	width: 153px;
+	height: 32px;
+	text-indent: -9999px;
+	border: none;
+	background: url(res/buy-button.png) no-repeat center center;
 }
