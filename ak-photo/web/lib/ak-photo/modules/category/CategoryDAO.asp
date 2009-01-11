@@ -8,7 +8,10 @@ CategoryDAO.toPojo = function(record) {
 	if (parentId) category.parent = new Category(parentId);
 	category.name = record.get("name");
 	category.description = record.get("description");
-	category.styles = [];
+	category.intro = record.get("intro");
+	category.price = record.get("price");
+	category.typeName = record.get("typeName");
+	category.styleName = record.get("styleName");
 	return category;
 }
 
@@ -17,24 +20,41 @@ CategoryDAO.fromPojo = function(category) {
 	if (category.parent) record.parentId = category.parent.id;
 	record.name = category.name;
 	record.description = category.description;
+	record.typeName = category.typeName;
+	record.styleName = category.styleName;
+	record.intro = category.intro;
+	record.price = category.price;
 	return new Map(record);
 }
 
 CategoryDAO.prototype.get = function(id, withSubs) {
 	if (!withSubs) { // Only one record
-		var sql = "SELECT TOP 1 c.id, c.lFlag, c.rFlag, c.parentId";
-		sql += ", c.name, c.description";
-		sql += ", s.id, s.title, s.images, s.example";
-		sql += " FROM [" + this.table + "] AS c";
-		sql += ", [site_CategoryStyle] AS s";
-		sql == " WHERE id = " + id;
+		var sql = "SELECT TOP 1 id, lFlag, rFlag, parentId";
+		sql += ", name, description, typeName, styleName, intro, price";
+		sql += " FROM [" + this.table + "]";
+		sql += " WHERE id = " + id;
 		var record = this.db.query(sql, 1);
 		if (!record) return;
-		return CategoryDAO.toPojo(record);
+		var typeRecords = this.db.query("SELECT id, title, images, example FROM site_CategoryType WHERE categoryId = " + id);
+		var styleRecords = this.db.query("SELECT id, title, images, example FROM site_CategoryStyle WHERE categoryId = " + id);
+		var category = CategoryDAO.toPojo(record);
+		if (typeRecords) typeRecords.forEach(function(record) {
+			category.types.push({
+				id: record.get("id"),
+				title: record.get("title")
+			});
+		});
+		if (styleRecords) styleRecords.forEach(function(record) {
+			category.styles.push({
+				id: record.get("id"),
+				title: record.get("title")
+			});
+		});
+		return category
 	}
 	// Also get sub categories
 	var sql = "SELECT id, parentId, lFlag, rFlag";
-	sql += ", name, description";
+	sql += ", name, description, typeName, styleName, intro, price";
 	sql += " FROM [" + this.table + "]";
 	if (id) {
 		var record = this.db.query("SELECT TOP 1 lFlag, rFlag FROM [" + this.table + "] WHERE id = " + id, 1);
@@ -61,6 +81,7 @@ CategoryDAO.prototype.get = function(id, withSubs) {
 	});
 	return root;
 }
+
 CategoryDAO.prototype.save = function(category) {
 	if (!category.parent) { // Save to root
 		var maxFlag = this.db.query("SELECT MAX(rFlag) AS maxFlag FROM [" + this.table + "]", 1).get("maxFlag");

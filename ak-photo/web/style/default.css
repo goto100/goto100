@@ -26,6 +26,8 @@ h1 {
 	color: #FFF;
 	background-color: #BBD965;
 }
+* html h1 {display: inline;}
+*+html h1 {display: inline;}
 ul.navbar, ol.navbar, dl.navbar {
 	display: inline-block;
 	vertical-align: top;
@@ -35,15 +37,20 @@ ul.navbar, ol.navbar, dl.navbar {
 	font-size: 14px;
 	background-color: #EAFCB5;
 }
+* html ul.navbar,* html ol.navbar,* html dl.navbar {display: inline;}
+*+html ul.navbar,*+html ol.navbar,*+html dl.navbar {display: inline;}
 dl.navbar dt {
 	display: inline-block;
 	margin-right: 20px;
 }
+* html dl.navbar dt {display: inline;}
+*+html dl.navbar dt {display: inline;}
 ul.navbar li, ol.navbar li, dl.navbar dd {
 	display: inline-block;
 	margin-right: 20px;
 }
-
+* html ul.navbar li, * html ol.navbar li, * html dl.navbar dd {display: inline;}
+*+html ul.navbar li, *+html ol.navbar li, *+html dl.navbar dd {display: inline;}
 div.navmenu {
 	width: 224px;
 	margin-bottom: 100px;
@@ -115,12 +122,8 @@ div.navmenu dd a {
 	padding: 0 14px;
 	background: url(res/blue-point.png) no-repeat center left;
 }
-* html #footer li {
-	display: inline;
-}
-*+html #footer li {
-	display: inline;
-}
+* html #footer li {display: inline;}
+*+html #footer li {display: inline;}
 #footer a {
 	text-decoration: none;
 	color: #FFF;
@@ -139,29 +142,29 @@ ol.steps li.step_1 {
 	background-position: 0 0;
 }
 ol.steps li.step_2 {
-	background-position: 0 -50px;
-}
-ol.steps li.step_3 {
 	background-position: 0 -100px;
 }
-ol.steps li.step_4 {
-	background-position: 0 -150px;
-}
-ol.steps li.step_5 {
+ol.steps li.step_3 {
 	background-position: 0 -200px;
 }
+ol.steps li.step_4 {
+	background-position: 0 -300px;
+}
+ol.steps li.step_5 {
+	background-position: 0 -400px;
+}
 ol.step_1 li.step_1 {
-	background-position: 0 -25px;
+	background-position: 0 -50px;
 }
 ol.step_2 li.step_2 {
-	background-position: 0 -75px;
+	background-position: 0 -150px;
 }
 ol.step_3 li.step_3 {
-	background-position: 0 -125px;
+	background-position: 0 -250px;
 }
 ol.step_4 li.step_4 {
-	background-position: 0 -175px;
+	background-position: 0 -350px;
 }
 ol.step_5 li.step_5 {
-	background-position: 0 -225px;
+	background-position: 0 -450px;
 }

@@ -1,6 +1,10 @@
 <!--#include file="modules/category/CategoryDAO.asp" -->
+<!--#include file="modules/type/TypeDAO.asp" -->
+<!--#include file="modules/style/StyleDAO.asp" -->
 <script language="javascript" runat="server">
 Site.prototype._categoryDao = null;
+Site.prototype._typeDAO = null;
+Site.prototype._styleDAO = null;
 
 Site.prototype.getCategoryDAO = function() {
 	if (!this._categoryDAO) {
@@ -9,6 +13,24 @@ Site.prototype.getCategoryDAO = function() {
 		this._categoryDAO.table = "site_Category";
 	}
 	return this._categoryDAO;
+}
+
+Site.prototype.getTypeDAO = function() {
+	if (!this._typeDAO) {
+		this._typeDAO = new TypeDAO();
+		this._typeDAO.db = this.db;
+		this._typeDAO.table = "site_CategoryType";
+	}
+	return this._typeDAO;
+}
+
+Site.prototype.getStyleDAO = function() {
+	if (!this._styleDAO) {
+		this._styleDAO = new StyleDAO();
+		this._styleDAO.db = this.db;
+		this._styleDAO.table = "site_CategoryStyle";
+	}
+	return this._styleDAO;
 }
 
 Site.prototype.getCategory = function(id, hasChild) {
@@ -34,5 +56,25 @@ Site.prototype.deleteCategory = function(id) {
 Site.prototype.moveCategory = function(id, isDown) {
 	var dao = this.getCategoryDAO();
 	dao.move(id, isDown);
+}
+
+Site.prototype.saveCategoryType = function(type) {
+	var dao = this.getTypeDAO();
+	dao.save(type);
+}
+
+Site.prototype.deleteCategoryType = function(id) {
+	var dao = this.getTypeDAO();
+	dao.del(id);
+}
+
+Site.prototype.saveCategoryStyle = function(style) {
+	var dao = this.getStyleDAO();
+	return dao.save(style);
+}
+
+Site.prototype.deleteCategoryStyle = function(id) {
+	var dao = this.getStyleDAO();
+	dao.del(id);
 }
 </script>
