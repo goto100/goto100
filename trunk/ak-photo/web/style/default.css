@@ -26,6 +26,44 @@ h1 {
 	color: #FFF;
 	background-color: #BBD965;
 }
+div.overlay {
+	background-color: #999999;
+	opacity: 0.8;
+}
+div.window {
+	width: 300px;
+	height: 200px;
+	border: 1px solid #000000;
+	background-color: #FFFFFF;
+}
+div.window h1,
+div.window h2,
+div.window h3,
+div.window h4,
+div.window h5,
+div.window h6 {
+	position: relative;
+	margin: 0;
+	border-bottom: 1px solid #000000;
+	font-family: Verdana, Geneva, sans-serif;
+}
+div.window h1 button.close,
+div.window h2 button.close,
+div.window h3 button.close,
+div.window h4 button.close,
+div.window h5 button.close,
+div.window h6 button.close {
+	position: absolute;
+	top: 2px;
+	right: 2px;
+}
+div.window div.panel {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+
+
 * html h1 {display: inline;}
 *+html h1 {display: inline;}
 ul.navbar, ol.navbar, dl.navbar {

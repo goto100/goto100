@@ -1,3 +1,5 @@
 <script language="javascript" runat="server">
-function Style() {}
+function Style(id) {
+	this.id = id || 0;
+}
 </script>

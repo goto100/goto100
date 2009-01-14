@@ -8,6 +8,8 @@ template.header = function() {
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>无标题文档</title>
 
+<script type="text/javascript" src="lib/xslui/base2-dom-fp.js"></script>
+<script type="text/javascript" src="lib/xslui/xslui.js"></script>
 <script type="text/javascript" src="lib/swfobject/swfobject.js"></script>
 <script type="text/javascript">
 swfobject.embedSWF("res/akHeader.swf", "sitenav", "766", "300", "9.0.0");

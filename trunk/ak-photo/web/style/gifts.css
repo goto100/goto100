@@ -95,3 +95,17 @@ h3 {
 	border: none;
 	background: url(res/buy-button.png) no-repeat center center;
 }
+div.styles {
+	padding: 15px;
+	border-bottom: 1px solid #666;
+}
+div.styles label {
+	margin: 10px;
+}
+div.style-thumb {
+	margin: 10px;
+	text-align: center;
+}
+div.style-thumb img {
+	border: 8px solid #CCC;
+}
