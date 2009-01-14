@@ -41,13 +41,15 @@ CategoryDAO.prototype.get = function(id, withSubs) {
 		if (typeRecords) typeRecords.forEach(function(record) {
 			category.types.push({
 				id: record.get("id"),
-				title: record.get("title")
+				title: record.get("title"),
+				images: record.get("images")
 			});
 		});
 		if (styleRecords) styleRecords.forEach(function(record) {
 			category.styles.push({
 				id: record.get("id"),
-				title: record.get("title")
+				title: record.get("title"),
+				images: record.get("images")
 			});
 		});
 		return category
