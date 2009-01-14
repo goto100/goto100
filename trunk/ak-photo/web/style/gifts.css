@@ -1,6 +1,9 @@
 h1 {
 	background-color: #3CBBE9;
 }
+#main {
+	padding-bottom: 100px;
+}
 div.box {
 	margin: 10px auto;
 }
@@ -75,6 +78,18 @@ h3 {
 #gift-upload-photo div.upload p {
 	display: inline;
 }
+#gift-upload-photo ul.images {
+}
+#gift-upload-photo ul.images li {
+	display: inline-block;
+	padding: 10px;
+	width: 160px;
+	text-align: center;
+}
+#gift-upload-photo ul.images li a {
+	vertical-align: middle;
+}
+
 #gift-buy-submit h2 {
 	width: 500px;
 }

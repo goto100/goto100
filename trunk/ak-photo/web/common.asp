@@ -24,4 +24,15 @@ UPLOAD_PATH = Server.MapPath("/ak-photo/web/_uploads/");
 var site = new Site();
 site.load();
 var controller = new Controller();
+
+var setSession = function(key, value) {
+	Session(key) = JSON.stringify(value);
+}
+
+var getSession = function(key) {
+	var value = Session(key);
+	if (typeof value == "string") return JSON.parse(value);
+	return value;
+}
+
 </script>

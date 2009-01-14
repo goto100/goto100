@@ -3,7 +3,8 @@
 <!--#include file="templates/default.asp" -->
 <script language="javascript" runat="server">
 controller.add(null, Action).action = function() {
-	cartPage.output();
+	var cart = getSession("cart") || [];
+	cartPage.output(cart);
 }
 
 controller.execute();
@@ -15,19 +16,26 @@ cartPage.template = template;
 cartPage.id = "cart";
 cartPage.styles.push("cart");
 
-cartPage.output = function() {
+cartPage.output = function(cart) {
 %>
 <%this.show("header")%>
 <h1>购物车</h1>
 <ol class="step_1 steps navbar">
-	<li class="step_1">样式选择</li>
-	<li class="step_2">确定数量</li>
-	<li class="step_3">上传照片</li>
-	<li class="step_4">提交订单</li>
+	<li class="step_1">确定商品</li>
+	<li class="step_3">填写配送信息</li>
+	<li class="step_4">确认订单</li>
+	<li class="step_4">在线支付</li>
+	<li class="step_4">完成</li>
 </ol>
 <div id="main">
 	<div id="content">
-		
+		<%if (cart.length) {%>
+			<ul>
+				<%cart.forEach(function(product) {
+				%><li><%=product.id%></li><%
+				});%>
+			</ul>
+		<%}%>
 	</div>
 </div>
 <%this.show("footer")%>
