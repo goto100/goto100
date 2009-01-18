@@ -124,3 +124,15 @@ div.style-thumb {
 div.style-thumb img {
 	border: 8px solid #CCC;
 }
+
+table.gifts {
+	width: 100%;
+}
+table.gifts td.figure {
+	padding: 10px 0;
+	text-align: center;
+}
+table.gifts td.figure a.caption {
+	display: block;
+	padding: 5px;
+}

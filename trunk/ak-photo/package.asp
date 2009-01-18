@@ -2,21 +2,23 @@
 function Package(name) {
 	this.name = name;
 }
-Package.prototype.namespace = function(klassName) {
-	return "var " + klassName + " = " + this.name + "." + klassName + ";";
+Package.prototype.addClass = function(className) {
+	this[className] = eval(className);
+}
+
+function $import(host, klass) {
+	host.JSON = klass;
 }
 
 var json2 = new Package("json2");
 </script>
 <!--#include file="web/lib/js-asp/json2.asp" -->
 <script language="javascript" runat="server">
-json2.JSON = JSON;
-
+json2.addClass("JSON");
 delete JSON;
 
-JSON = json2.JSON;
+$import(this, json2.JSON);
 
-Response.Write(JSON.parse)
-
+Response.Write(JSON.parse);
 
 </script>

@@ -11,7 +11,13 @@ Site.prototype.load = function() {
 	this.db.dbPath = MAIN_DB_PATH;
 	this.db.open();
 	var adminPassword = Session("AdminPassword");
-	if (adminPassword) this.loginAdmin(adminPassword);
+	if (adminPassword) {
+		try {
+			this.loginAdmin(adminPassword);
+		} catch(e) {
+			Session("AdminPassword") = null;
+		}
+	}
 	
 }
 

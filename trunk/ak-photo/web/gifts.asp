@@ -21,7 +21,7 @@ controller.add(/^\d+?$/ig, Action).action = function() {
 		var fso = Server.CreateObject("Scripting.FileSystemObject");
 		var path = Server.MapPath(delsrc);
 		if (fso.FileExists(path)) fso.DeleteFile(path);
-		setSession(sessionKey, images)
+		setSession(sessionKey, images);
 	}
 	giftFormPage.output(category, this.search.get("count") || 1, images);
 }
@@ -34,14 +34,13 @@ controller.add(/^\d+?$/ig, PostAction).action = function() {
 	})[0] || new Style(0);
 	var files = this.input.get("file");
 	var sessionKey = "gift-" + category.id + "-images";
-	var images = Session(sessionKey) || [];
-	if (typeof images == "string") images = JSON.parse(images);
+	var images = getSession(sessionKey) || [];
 	files.forEach(function(file) {
-		var path = "_uploads/" + Session.SessionID + "-" + (new Date()).valueOf() +".jpg";
+		var path = UPLOAD_PATH + Session.SessionID + "-" + (new Date()).valueOf() +".jpg";
 		file.save(Server.MapPath(path));
 		images.push(path);
 	});
-	Session(sessionKey) = JSON.stringify(images);
+	setSession(sessionKey, images);
 	giftFormPage.output(category, this.search.get("count") || 1, images);
 }
 
@@ -51,10 +50,11 @@ controller.add("submit", PostAction).action = function() {
 	var gift = category;
 	gift.count = parseInt(this.input.get("count")),
 	gift.images = getSession(sessionKey) || [];
-	var cart = getSession("cart") || [];
-	cart.push(gift);
-	setSession("cart", cart);
-	giftDeliveryFormPage.output();
+	gift.style = new Style(parseInt(this.input.get("style")));
+	var gifts = getSession("gifts") || [];
+	gifts.push(gift);
+	setSession("gifts", gifts);
+	this.redirect("cart.asp");
 }
 
 controller.execute();
@@ -91,61 +91,10 @@ var giftFormPage = new Page();
 giftFormPage.template = template;
 giftFormPage.id = "gifts";
 giftFormPage.styles.push("gifts");
-
+giftFormPage.scripts.push("common");
 giftFormPage.output = function(category, count, images) {
 %>
 <%this.show("header")%>
-<script type="text/javascript">
-var startTime = Date.now();
-
-function FileTransferProgress(transferred, size, startTime) {
-	this.startTime = startTime || Date.now();
-	this.transferred = transferred || 0;
-	this.size = size || 0;
-	this.remain = this.size - this.transferred;
-	this.percent = this.transferred * 100 / this.size;
-	this.time = {};
-	this.time.used = Date.now() - startTime;
-	this.speed = this.transferred / this.time.used;
-	this.time.remain = this.remain / this.speed;
-}
-
-function displayProgress() {
-	var interval = 500;
-	var div = document.getElementById("uploadProgressWindowProgress");
-	var filePath = "/ak-photo/web/_uploads/.upload.xml";
-   var request = new XMLHttpRequest();
-	request.open("GET", filePath, false);
-	request.setRequestHeader("No-Cache", "1");
-	request.setRequestHeader("Pragma", "no-cache");
-	request.setRequestHeader("Cache-Control", "no-cache");
-	request.setRequestHeader("Expire", "0");
-	request.setRequestHeader("Last-Modified", "Wed, 1 Jan 1997 00:00:00 GMT");
-	request.setRequestHeader("If-Modified-Since", "-1");
-	request.send(null);
-	if (request.status != 200) setTimeout(DisplayProgressBar, interval);
-	var xml = request.responseXML;
-	var read = xml.documentElement.getAttribute("read");
-	var total = xml.documentElement.getAttribute("total");
-	var upload = new FileTransferProgress(parseInt(read), parseInt(total), startTime);
-	div.innerHTML = "<ul><li>" + upload.transferred + "/" + upload.size + "</li>"
-		+ "<li>Remain: " + Math.round(upload.remain / 1000) + "KB</li>"
-		+ "<li>Speed: " + Math.floor(upload.speed) + "KB/s</li>"
-		+ "<li>Time Used: " + Math.round(upload.time.used / 1000) + "s</li>"
-		+ "<li>Time Remain: " + Math.round(upload.time.remain / 1000) + "s</li></ul>"
-		+ "<div style=\"height: 10px; background-color: #000; width: " + upload.percent + "%\"\>  \<\/div\>";
-	setTimeout(displayProgress, interval);
-}
-
-
-
-function showUploadProgress() {
-	var progressWindow = document.getElementById("uploadProgressWindow");
-	progressWindow.closable = true;
-	displayProgress();
-	progressWindow.open();
-}
-</script>
 <div id="uploadProgressWindow" class="draggable modal window">
 	<h4>上传中……</h4>
 	<div id="uploadProgressWindowProgress"></div>
@@ -220,67 +169,6 @@ function showUploadProgress() {
 				</form>
 			</div>
 		</div>
-	</div>
-</div>
-<%this.show("footer")%>
-<%
-}
-
-var giftDeliveryFormPage = new Page();
-giftDeliveryFormPage.template = template;
-giftDeliveryFormPage.id = "gifts";
-giftDeliveryFormPage.styles.push("gifts");
-
-giftDeliveryFormPage.output = function() {
-%>
-<%this.show("header")%>
-<h1>提交订单</h1>
-<ol class="step_1 steps navbar">
-	<li class="step_1">样式选择</li>
-	<li class="step_2">确定数量</li>
-	<li class="step_3">上传照片</li>
-	<li class="step_4">提交订单</li>
-</ol>
-<div id="main">
-	<div id="content">
-		<form action="#" method="post">
-			<ul>
-				<li><label class="text"><strong>配送地址: </strong><input type="text" name="" value="" /></label></li>
-				<li><label class="text"><strong>收货人姓名: </strong><input type="text" name="" value="" /></label></li>
-				<li><label class="text"><strong>收货人手机: </strong><input type="text" name="" value="" /></label></li>
-			</ul>
-			<input type="submit" value="提交订单" />
-		</form>
-	</div>
-</div>
-<%this.show("footer")%>
-<%
-}
-
-var giftOrderCreatedPage = new Page();
-giftOrderCreatedPage.template = template;
-giftOrderCreatedPage.id = "gifts";
-giftOrderCreatedPage.styles.push("gifts");
-
-giftOrderCreatedPage.output = function() {
-%>
-<%this.show("header")%>
-<h1>提交订单</h1>
-<ol class="step_1 steps navbar">
-	<li class="step_1">样式选择</li>
-	<li class="step_2">确定数量</li>
-	<li class="step_3">上传照片</li>
-	<li class="step_4">提交订单</li>
-</ol>
-<div id="main">
-	<div id="content">
-		<h2>您的订单已经创建完成！</h2>
-		<ul>
-			<li>订单号：</li>
-			<li>总金额：</li>
-		</ul>
-		<p>请您记住订单号，进入淘宝网</p>
-		<p>按照淘宝内提示进行操作</p>
 	</div>
 </div>
 <%this.show("footer")%>
