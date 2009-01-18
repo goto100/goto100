@@ -28,4 +28,11 @@ SettingDAO.prototype.get = function(name) {
 	var record = this.db.query("SELECT " + name + " FROM " + this.table, 1);
 	return record.get(name);
 }
+
+SettingDAO.prototype.set = function(name, value) {
+	var map = {};
+	map[name] = value;
+	this.db.update(this.table, new Map(map));
+}
+
 </script>

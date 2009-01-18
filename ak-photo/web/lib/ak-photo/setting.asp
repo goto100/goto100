@@ -24,4 +24,19 @@ Site.prototype.logoutAdmin = function() {
 	Session("AdminPassword") = null;
 }
 
+Site.prototype.changeAdminPassword = function(password) {
+	var dao = this.getSettingDAO();
+	dao.set("adminPassword", password);
+}
+
+Site.prototype.getSetting = function(name) {
+	var dao = this.getSettingDAO();
+	return dao.get(name);
+}
+
+Site.prototype.setSetting = function(name, value) {
+	var dao = this.getSettingDAO();
+	dao.set(name, value);
+}
+
 </script>

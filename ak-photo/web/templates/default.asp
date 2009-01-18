@@ -11,6 +11,11 @@ template.header = function() {
 <script type="text/javascript" src="lib/xslui/base2-dom-fp.js"></script>
 <script type="text/javascript" src="lib/xslui/xslui.js"></script>
 <script type="text/javascript" src="lib/swfobject/swfobject.js"></script>
+<%
+this.scripts.forEach(function(script) {
+	%><script type="text/javascript" src="script/<%=script%>.js"></script><%
+});
+%>
 <script type="text/javascript">
 swfobject.embedSWF("res/akHeader.swf", "sitenav", "766", "300", "9.0.0");
 </script>
@@ -54,12 +59,21 @@ template.footer = function() {
 
 template.category = function(category) {
 	if (!category.length) return;
-	%><ul><%
-	category.forEach(function(category) {
-		%><li><a href="?<%=category.id%>"><%=category.name%></a></li><%
-		template.category(category);
-	});
-	%></ul><%
+	%><table class="gifts"><%
+	for (var i = 0; i < category.length / 4; i++) {
+		%><tr><%
+		for (var j = 0; j < 4; j++) {
+			var cate = category[i * 4 + j];
+			if (cate) {
+			%><td class="figure">
+				<a href="?<%=cate.id%>"><img src="_uploads/category-<%=cate.id%>.jpg" alt="<%=cate.name%>" width="200" height="200" /></a>
+				<a class="caption" href="gifts.asp?<%=cate.id%>"><%=cate.name%></a>
+			</td><%
+			}
+		}
+		%></tr><%
+	}
+	%></table><%
 }
 
 %>

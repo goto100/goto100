@@ -7,9 +7,7 @@ if (!site.adminLoggedIn) Response.End();
 
 controller.add(null, Action).action = function() {
 	var category = site.getCategory(null, true);
-	var page = new Page();
-	page.template = adminTemplate;
-	page.show("category", category);
+	page.showCategory(category);
 }
 
 controller.add(null, PutAction).action = function() {
@@ -38,15 +36,15 @@ controller.add(/\d+?/ig, PostAction).action = function() {
 	category.name = this.input.get("name");
 	category.typeName = this.input.get("typeName");
 	category.styleName = this.input.get("styleName");
-	category.price = parseInt(this.input.get("price"));
+	category.price = parseInt(this.input.get("price")) || undefined;
 	category.intro = this.input.get("intro");
 	category.description = this.input.get("description");
 	site.updateCategory(this.getId(), category);
 	var thumbnails = this.input.get("thumbnail");
-	thumbnails.forEach(function(thumb) {
+	if (thumbnails) thumbnails.forEach(function(thumb) {
 		thumb.save(Server.MapPath("/ak-photo/web/_uploads/category-" + category.id + ".jpg"));
 	});
-	if (this.input.get("move")) site.moveCategory(this.getId(), this.input.get("move") == "down" ? true: false);
+	if (this.input.get("move")) site.moveCategory(this.getId(), {up: false, down: true}[this.input.get("move")]);
 	// this.redirect("category.asp");
 }
 
@@ -104,6 +102,17 @@ controller.execute();
 </script>
 
 <%
+
+var page = new Page();
+page.template = adminTemplate;
+
+page.showCategory = function(category) {
+	this.show("header");
+	this.show("category", category);
+	this.show("footer");
+}
+
+
 function showCategoryForm(category, allCategory) {
 %>
 <form action="category.asp?<%=category.id%>" method="post" enctype="multipart/form-data">
