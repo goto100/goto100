@@ -17,7 +17,7 @@ controller.add(null, PostAction).action = function() {
 	var counts = this.input.get("count");
 	photos.forEach(function(photo, i) {
 		photo.size = sizes[i];
-		photo.count = counts[i];
+		photo.count = parseInt(counts[i]);
 	});
 	setSession("photos", photos);
 	deliveryFormPage.output();
@@ -38,7 +38,7 @@ controller.add("submit", PostAction).action = function() {
 	order.delivery = {
 		
 	}
-	site.saveOrder(order);
+	var order = site.saveOrder(order);
 	orderCreatedPage.output(order);
 }
 
@@ -84,7 +84,7 @@ cartPage.output = function(photos, gifts) {
 				%><li>
 					<img src="<%=photo.src%>" width="80" />
 						<a href=""></a><a href="print.asp?delimg=<%=i%>">删除</a>
-						<label class="input"><input type="text" name="count" size="2" value="<%=photo.count%>" />张</label>
+						<label class="input"><input type="text" name="count" size="2" value="<%=photo.count? photo.count : 1%>" />张</label>
 						<select name="size">
 							<%photos.sizes.forEach(function(size) {
 							%><option value="<%=size%>"<%if (photo.size == size) {%> selected="selected"<%}%>><%=size%></option><%
@@ -206,7 +206,7 @@ orderCreatedPage.output = function(order) {
 	<div id="content">
 		<h2>您的订单已经创建完成！</h2>
 		<ul>
-			<li>订单号：<%=order.id + 10000%></li>
+			<li>订单号：<%=order.no%></li>
 			<li>总金额：<%=order.amount%></li>
 		</ul>
 		<p>请您记住订单号，进入淘宝网</p>

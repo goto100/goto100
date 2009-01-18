@@ -15,6 +15,6 @@ Site.prototype.getOrderDAO = function() {
 
 Site.prototype.saveOrder = function(order) {
 	var dao = this.getOrderDAO();
-	dao.save(order);
+	return dao.save(order);
 }
 </script>

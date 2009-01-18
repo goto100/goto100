@@ -22,7 +22,7 @@ controller.add(null, Action).action = function() {
 controller.add(null, PostAction).action = function() {
 	var photos = getSession("photos") || [];
 	var size = this.input.get("size");
-	var count = this.input.get("count");
+	var count = parseInt(this.input.get("count"));
 	photos.forEach(function(photo, i) {
 		photo.size = size;
 		photo.count = count;
