@@ -5,3 +5,7 @@ body {
 table {
 	width: 100%;
 }
+ul.pagebar li {
+	display: inline;
+	padding: 0 4px;
+}
