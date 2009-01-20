@@ -19,13 +19,6 @@ Response.Charset = "utf-8";
 
 Session.Timeout = 20;
 
-MAIN_DB_PATH = Server.MapPath("/") + "/ak-photo/db/site.mdb";
-NAMESPACE = "ak";
-UPLOAD_PATH = "/ak-photo/_uploads/";
-var site = new Site();
-site.load();
-var controller = new Controller();
-
 var setSession = function(key, value) {
 	Session(key) = JSON.stringify(value);
 }
@@ -35,5 +28,12 @@ var getSession = function(key) {
 	if (typeof value == "string") return JSON.parse(value);
 	return value;
 }
+
+MAIN_DB_PATH = Server.MapPath("/") + "/ak-photo/db/site.mdb";
+NAMESPACE = "ak";
+UPLOAD_PATH = "/ak-photo/_uploads/";
+var site = new Site();
+site.load();
+var controller = new Controller();
 
 </script>

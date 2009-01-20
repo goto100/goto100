@@ -54,4 +54,16 @@ adminTemplate.category = function(category) {
 	});
 	%></table><%
 }
+
+adminTemplate.pagebar = function(count, current) {
+	%><ul class="pagebar"><%
+	for (var i = 1; i <= count; i++) {
+		if (i == current) {
+			%><li><%=i%></li><%
+		} else {
+			%><li><a href="?page=<%=i%>"><%=i%></a></li><%
+		}
+	}
+	%></ul><%
+}
 %>

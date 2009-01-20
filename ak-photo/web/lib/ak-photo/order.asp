@@ -13,8 +13,23 @@ Site.prototype.getOrderDAO = function() {
 	return this._orderDao;
 }
 
+Site.prototype.getOrder = function(id) {
+	var dao = this.getOrderDAO();
+	return dao.get(id);
+}
+
 Site.prototype.saveOrder = function(order) {
 	var dao = this.getOrderDAO();
 	return dao.save(order);
+}
+
+Site.prototype.deleteOrder = function(id) {
+	var dao = this.getOrderDAO();
+	return dao.del(id);
+}
+
+Site.prototype.getOrders = function(page) {
+	var dao = this.getOrderDAO();
+	return dao.list(10, page);
 }
 </script>
