@@ -35,10 +35,10 @@ controller.add("upload", PostAction).action = function() {
 	var files = this.input.get("file");
 	var sessionKey = "photos";
 	var images = getSession(sessionKey) || [];
-	files.forEach(function(file) {
-		var path = UPLOAD_PATH + Session.SessionID + "-" + (new Date()).valueOf() +".jpg";
+	files.forEach(function(file, i) {
+		var path = UPLOAD_PATH + Session.SessionID + "-" + (new Date()).valueOf() + i + ".jpg";
 		file.save(Server.MapPath(path));
-		images.push({src: path});
+		images.push({size: "", count: 1, src: path});
 	});
 	setSession(sessionKey, images);
 	this.redirect("cart.asp");
@@ -63,7 +63,7 @@ printPage.output = function() {
 
 <h1>上传相片</h1><ol class="step_1 steps navbar"><li class="step_1">上传相片</li><li class="step_2">设置尺寸和数量</li><li class="step_3">填写配送信息</li><li class="step_4">确认订单</li><li class="step_5">完成</li></ol><div id="main">
 	<div id="content">
-		<form action="print.asp?upload" enctype="multipart/form-data" method="post" onSubmit="showUploadProgress();">
+		<form id="print-uploader" action="print.asp?upload" enctype="multipart/form-data" method="post" onSubmit="showUploadProgress();">
 			<ul>
 				<li><label>照片: <input type="file" name="file" /></label></li>
 				<li><label>照片: <input type="file" name="file" /></label></li>
@@ -71,7 +71,7 @@ printPage.output = function() {
 				<li><label>照片: <input type="file" name="file" /></label></li>
 				<li><label>照片: <input type="file" name="file" /></label></li>
 			</ul>
-			<input type="submit" value="上传" />
+			<input class="submit" type="submit" value="上传" />
 		</form>
 	</div>
 </div>

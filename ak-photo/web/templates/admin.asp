@@ -18,6 +18,7 @@ this.scripts.forEach(function(script) {
 });
 %>
 <link href="../lib/huan/reset.css" rel="stylesheet" type="text/css" />
+<link href="../lib/huan/huan.css" rel="stylesheet" type="text/css" />
 <link href="../style/admin.css" rel="stylesheet" type="text/css" />
 <%
 this.styles.forEach(function(style) {
@@ -27,6 +28,12 @@ this.styles.forEach(function(style) {
 </head>
 
 <body id="<%=this.id%>">
+<ul class="menu">
+	<li><a href="orders.asp">订单管理</a></li>
+	<li><a href="category.asp">礼品分类管理</a></li>
+	<li><a href="setting.asp?photosize">照片尺寸</a></li>
+	<li><a href="setting.asp?changepassword">修改密码</a></li>
+</ul>
 <%
 }
 
@@ -43,14 +50,14 @@ adminTemplate.category = function(category) {
 	category.forEach(function(category) {
 		%><tr>
 			<th><%=category.name%></th>
-			<td><%if (category.typeName) {%><a href="?<%=category.id%>/types"><%=category.typeName%></a><%}%></td>
-			<td><%if (category.styleName) {%><a href="?<%=category.id%>/styles"><%=category.styleName%></a><%}%></td>
-			<td><a href="?<%=category.id%>/edit">edit</a></td>
+			<%if (category.depth == 0) {
+			%><td><%if (category.typeName) {%><a href="?<%=category.id%>"><%=category.typeName%></a><%}%></td>
+			<td><%if (category.styleName) {%><a href="?<%=category.id%>/styles"><%=category.styleName%></a><%}%></td><%}%>
+			<td><a href="?<%=category.id%>/edit">编辑</a></td>
 			<td><form action="category.asp?<%=category.id%>" method="post"><button name="__method__" value="delete">删除</button></form></td>
 			<td><form action="category.asp?<%=category.id%>" method="post"><button name="move" value="up">上移</button></form></td>
 			<td><form action="category.asp?<%=category.id%>" method="post"><button name="move" value="down">下移</button></form></td>
 		</tr><%
-		adminTemplate.category(category);
 	});
 	%></table><%
 }

@@ -1,13 +1,41 @@
-var startTime = Date.now();
+if (!window.XMLHttpRequest) XMLHttpRequest = {native: false};
+else XMLHttpRequest.native = true;
+
+XMLHttpRequest.create = function() {
+	if (XMLHttpRequest.native) return new XMLHttpRequest();
+	try{
+		return new ActiveXObject('MSXML2.XMLHTTP.4.0');
+	} catch(e){
+		try{
+			return new ActiveXObject('MSXML2.XMLHTTP.3.0');
+		} catch(e) {
+			try {
+				return new ActiveXObject('MSXML2.XMLHTTP.2.6');
+			} catch(e) {
+				try {
+					return new ActiveXObject('MSXML2.XMLHTTP');
+				} catch(e) {
+					try {
+						return new ActiveXObject('Microsoft.XMLHTTP');
+					} catch(e) {
+						return null;
+					}
+				}
+			}
+		}
+	}
+}
+
+var startTime = new Date();
 
 function FileTransferProgress(transferred, size, startTime) {
-	this.startTime = startTime || Date.now();
+	this.startTime = startTime || new Date();
 	this.transferred = transferred || 0;
 	this.size = size || 0;
 	this.remain = this.size - this.transferred;
 	this.percent = this.transferred * 100 / this.size;
 	this.time = {};
-	this.time.used = Date.now() - startTime;
+	this.time.used = new Date() - startTime;
 	this.speed = this.transferred / this.time.used;
 	this.time.remain = this.remain / this.speed;
 }
@@ -15,8 +43,8 @@ function FileTransferProgress(transferred, size, startTime) {
 function displayProgress() {
 	var interval = 500;
 	var div = document.getElementById("uploadProgressWindowProgress");
-	var filePath = "/ak-photo/web/_uploads/.upload.xml";
-   var request = new XMLHttpRequest();
+	var filePath = "/ak-photo/_uploads/.upload.xml";
+   var request = XMLHttpRequest.create();
 	request.open("GET", filePath, false);
 	request.setRequestHeader("No-Cache", "1");
 	request.setRequestHeader("Pragma", "no-cache");
@@ -25,7 +53,7 @@ function displayProgress() {
 	request.setRequestHeader("Last-Modified", "Wed, 1 Jan 1997 00:00:00 GMT");
 	request.setRequestHeader("If-Modified-Since", "-1");
 	request.send(null);
-	if (request.status != 200) setTimeout(DisplayProgressBar, interval);
+	if (request.status != 200) setTimeout(displayProgress, interval);
 	var xml = request.responseXML;
 	var read = xml.documentElement.getAttribute("read");
 	var total = xml.documentElement.getAttribute("total");

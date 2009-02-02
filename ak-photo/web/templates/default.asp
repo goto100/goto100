@@ -6,7 +6,7 @@ template.header = function() {
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
+<title><%=this.title? this.title + ' - ' : ''%>安康影像网</title>
 
 <script type="text/javascript" src="lib/xslui/base2-dom-fp.js"></script>
 <script type="text/javascript" src="lib/xslui/xslui.js"></script>
@@ -18,8 +18,10 @@ this.scripts.forEach(function(script) {
 %>
 <script type="text/javascript">
 swfobject.embedSWF("res/akHeader.swf", "sitenav", "766", "300", "9.0.0");
+swfobject.embedSWF("res/promotion.swf", "promotion-flash", "555", "180", "9.0.0");
 </script>
 <link href="lib/huan/reset.css" rel="stylesheet" type="text/css" />
+<link href="lib/huan/huan.css" rel="stylesheet" type="text/css" />
 <link href="style/default.css" rel="stylesheet" type="text/css" />
 <%
 this.styles.forEach(function(style) {
@@ -60,13 +62,13 @@ template.footer = function() {
 template.category = function(category) {
 	if (!category.length) return;
 	%><table class="gifts"><%
-	for (var i = 0; i < category.length / 4; i++) {
+	for (var i = 0; i < category.length / 3; i++) {
 		%><tr><%
-		for (var j = 0; j < 4; j++) {
-			var cate = category[i * 4 + j];
+		for (var j = 0; j < 3; j++) {
+			var cate = category[i * 3 + j];
 			if (cate) {
 			%><td class="figure">
-				<a href="?<%=cate.id%>"><img src="_uploads/category-<%=cate.id%>.jpg" alt="<%=cate.name%>" width="200" height="200" /></a>
+				<a href="?<%=cate.id%>"><img src="_uploads/category-<%=cate.id%>.jpg" alt="<%=cate.name%>" width="200" height="130" /></a>
 				<a class="caption" href="gifts.asp?<%=cate.id%>"><%=cate.name%></a>
 			</td><%
 			}

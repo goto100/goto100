@@ -1,7 +1,12 @@
 #help #content {
 	width: 640px;
 }
-#help h2 {
+#help #content h2 {
+	padding: 10px;
+	color:#339933;
+	background-color:#BBD965;
+}
+#help #content h3 {
 	font-size: 14px;
 	font-weight: bold;
 	line-height: 3em;
@@ -9,12 +14,17 @@
 }
 #help table {
 	width: 100%;
+	margin: 10px auto;
 	border-top: 1px solid #7EAB3F;
 	border-left: 1px solid #7EAB3F;
 }
 #help thead {
 	color: #FFF;
 	background-color: #7EAB3F;
+}
+#help thead th {
+	border-right: 1px solid #FFF;
+	border-bottom: 1px solid #FFF;
 }
 #help th {
 	text-align: center;

@@ -9,14 +9,22 @@ controller.add(null, Action).action = function() {
 
 controller.add(/^\d+?$/ig, Action).action = function() {
 	var category = site.getCategory(this.getId());
+	if (category.depth == 0 && category.length) this.redirect("gifts.asp?" + category[0].id);
+	if (category.depth == 1) {
+		category.parent = site.getCategory(category.parent.id);
+		category.typeName = category.parent.typeName;
+		category.styleName = category.parent.styleName;
+		if (!category.intro) category.intro = category.parent.intro;
+		if (!category.description) category.description = category.parent.description;
+	}
 	var styleId = parseInt(this.search.get("style"));
 	category.style = category.styles.filter(function(style) {
 		return style.id == styleId;
-	})[0] || new Style(0);
+	})[0] || category.styles[0];
+	var sessionKey = "gift-" + category.id + "-images";
+	var images = getSession(sessionKey) || [];
 	var delimg = this.search.get("delimg");
 	if (delimg) {
-		var sessionKey = "gift-" + category.id + "-images";
-		var images = getSession(sessionKey) || [];
 		var delsrc = images.splice(parseInt(delimg), 1);
 		var fso = Server.CreateObject("Scripting.FileSystemObject");
 		var path = Server.MapPath(delsrc);
@@ -52,6 +60,7 @@ controller.add("submit", PostAction).action = function() {
 	gift.images = getSession(sessionKey) || [];
 	gift.style = new Style(parseInt(this.input.get("style")));
 	var gifts = getSession("gifts") || [];
+	gifts.forEach(function(item, i) { if (gift.id == item.id) gifts.splice(i, 1);	});
 	gifts.push(gift);
 	setSession("gifts", gifts);
 	this.redirect("cart.asp");
@@ -69,14 +78,22 @@ giftPage.styles.push("gifts");
 giftPage.output = function(category) {
 %>
 <%this.show("header")%>
-<h1>影像礼品</h1>
-<ol class="step_1 steps navbar">
-	<li class="step_1">样式选择</li>
-	<li class="step_2">确定数量</li>
-	<li class="step_3">上传照片</li>
-	<li class="step_4">提交订单</li>
-</ol>
 <div id="main">
+	<div id="sidebar">
+		<div id="gifts-list">
+			<h3>影像礼品列表</h3>
+			<ul>
+				<%category.forEach(function(category) {
+				%><li><a href="?<%=category.id%>"><%=category.name%></li></a><%
+				});%>
+			</ul>
+		</div>
+		<div id="activity-gifts-list">
+			<h3>特色主题区</h3>
+			<ul>
+			</ul>
+		</div>
+	</div>
 	<div id="content">
 		<%this.show("category", category)%>
 	</div>
@@ -89,7 +106,7 @@ giftPage.output = function(category) {
 
 var giftFormPage = new Page();
 giftFormPage.template = template;
-giftFormPage.id = "gifts";
+giftFormPage.id = "giftForm";
 giftFormPage.styles.push("gifts");
 giftFormPage.scripts.push("common");
 giftFormPage.output = function(category, count, images) {
@@ -109,32 +126,48 @@ giftFormPage.output = function(category, count, images) {
 <div id="main">
 	<div id="content">
 		<div id="gift-description">
-			<h3><%=category.name%></h3>
+			<h3><%=category.depth? category.parent.name : category.name%></h3>
 			<div class="thumb"><img src="_uploads/category-<%=category.id%>.jpg"/></div>
 			<div class="intro"><%=category.intro%></div>
 		</div>
 		<div id="gift-description-more">
 			<h3>详细说明:</h3>
-			<p class="price">单价: <%=category.price%>元</p>
+			<p>单价: <strong><%=category.price%>元</strong></p>
+			<%if (category.typeName) {%><label><%=category.typeName%>: <select name="type">
+				<%category.parent.forEach(function(cate) {
+					%><option onClick="location.href = 'gifts.asp?<%=cate.id%>'" value="<%=cate.id%>"<%if (category.id == cate.id) {%> selected="selected"<%}%>><%=cate.name%></option><%
+				})%>
+				</select>
+			</label><%}%>
 			<div class="description"><%=category.description%></div>
 		</div>
-		<div id="gift-select-style" class="box">
+		<%
+		if (!category.styles.length) {
+			%><h2>此分类还没有添加默认样式，请去后台添加！</h2><%
+			Response.End();
+		}
+		if (category.styles.length > 1) {
+		%><div id="gift-select-style" class="box">
 			<h2>选择<%=category.styleName%></h2>
 			<div class="styles">
 				<%category.styles.forEach(function(style) {%>
 				<label><input type="radio" name="style" value="<%=style.id%>"<%if (category.style && style && category.style.id == style.id) {%>checked="checked"<%}%> onClick="location.href = 'gifts.asp?<%=category.id%>&amp;style=<%=style.id%>&amp;count=<%=count%>'" /><strong><%=style.title%></strong></label>
 				<%});%>
 			</div>
-			<%if (category.style && category.style.id) {%>
-			<div class="style-thumb">
+			<%if (category.style && category.style.id) {
+			%><div class="style-thumb">
 				<img src="_uploads/style-<%=category.style.id%>.jpg" />
-			</div>
-			<%}%>
-		</div>
+			</div><%
+			}%>
+		</div><%
+		} else {
+		%><input type="hidden" name="style" value="<%=category.style.id%>" /><%}%>
 		<div id="gift-buy-count" class="box">
 			<h2>确定数量</h2>
-			<label class="input"><strong>购买数量: </strong><input type="text" id="gift-count" name="count" value="<%=count%>" /></label>
-			<input type="submit" value="确定" onClick="location.href = 'gifts.asp?<%=category.id%>&amp;style=<%=category.style.id%>&amp;count=' + document.getElementById('gift-count').value" />
+			<div id="gift-buy-count-content">
+				<label class="input"><strong>购买数量: </strong><input type="text" id="gift-count" name="count" value="<%=count%>" /></label>
+				<input type="submit" value="确定" onClick="location.href = 'gifts.asp?<%=category.id%>&amp;style=<%=category.style.id%>&amp;count=' + document.getElementById('gift-count').value" />
+			</div>
 		</div>
 		<div id="gift-upload-photo" class="box">
 			<h2>上传照片</h2>
@@ -142,7 +175,7 @@ giftFormPage.output = function(category, count, images) {
 				<%if (!images || (images && images.length < category.style.images)) {%>
 				<form action="gifts.asp?<%=category.id%>&amp;style=<%=category.style.id%>&amp;count=<%=count%>" method="post" enctype="multipart/form-data" onSubmit="showUploadProgress()">
 					<input type="file" name="file" />
-					<p>仅支持jpg、jpeg格式</p>
+					<p>您还需要上传<%=category.style.images - images.length%>张照片，仅支持jpg、jpeg格式</p>
 					<input type="submit" value="上传" />
 				</form>
 				<%} else {%>
@@ -175,4 +208,5 @@ giftFormPage.output = function(category, count, images) {
 <%
 }
 %>
+
 

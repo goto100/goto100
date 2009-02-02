@@ -1,3 +1,5 @@
+ul,ol,dl{margin:0;padding:0;}
+li{list-style-type:none;}
 #content {
 	padding-top: 80px;
 	background: url(res/print-content-bg.png) no-repeat 20px top;
@@ -58,12 +60,20 @@
 	padding: 80px 20px 10px 31px;
 	background: url(res/index-promotion-4.png) no-repeat center center;
 }
+#promotion-flash {
+	display:inline-block;
+}
+*html #promotion-flash {display:inline;}
+*+html #promotion-flash {display:inline;}
 #promotion-help {
+	display:inline-block;
 	width: 320px;
 	height: 110px;
 	padding: 80px 10px 10px 7px;
 	background: url(res/index-promotion-help.png) no-repeat center center;
 }
+*html #promotion-help {display:inline;}
+*+html #promotion-help {display:inline;}
 #promotion-help ul {
 	float: left;
 	width: 80px;
@@ -72,7 +82,7 @@
 #partners {
 	width: 760px;
 	height: 60px;
-	margin-left: 110px;
+	margin-left:80px;
 	padding: 10px 10px 10px 50px;
 	background: url(res/index-partners.png) no-repeat left top;	
 }
