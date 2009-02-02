@@ -2,6 +2,7 @@ h1 {
 	background-color: #3CBBE9;
 }
 #main {
+	float: left;
 	padding-bottom: 100px;
 }
 div.box {
@@ -27,6 +28,8 @@ h3 {
 	display: inline-block;
 	width: 460px;
 }
+* html #gift-description {display:inline;}
+*+html #gift-description {display:inline;}
 #gift-description div.thumb {
 	text-align: center;
 }
@@ -35,7 +38,15 @@ h3 {
 	width: 380px;
 	vertical-align: top;
 }
-#gifts h2 {
+* html #gift-description-more{display:inline;}
+*+html #gift-description-more{display:inline;}
+#gifts #sidebar {
+	width: 200px;
+}
+#gifts #content {
+	width: 700px;
+}
+h2 {
 	display: inline-block;
 	width: 850px;
 	height: 35px;
@@ -48,8 +59,35 @@ h3 {
 	background-image: url(res/green-steps.png);
 	background-repeat: no-repeat;
 }
-* html #gifts h2 {display: inline;}
-*+html #gifts h2 {display: inline;}
+* html h2 {display: inline;}
+*+html h2 {display: inline;}
+#gifts #gifts-list {
+	margin: 10px 0;
+	border: 1px solid #00B4F1;
+}
+#gifts #gifts-list h3 {
+	padding: 10px;
+	color: #FFF;
+	background-color:#00B4F1;
+}
+#gifts #gifts-list ul {
+	margin: 10px;
+}
+#gifts #gifts-list li {
+	line-height: 1.8em;
+}
+#gifts #activity-gifts-list {
+	margin: 10px 0;
+	border: 1px solid #FF6600;
+}
+#gifts #activity-gifts-list h3 {
+	padding: 10px;
+	color: #FFF;
+	background-color:#FF6600;
+}
+#gifts #activity-gifts-list ul {
+	margin: 10px;
+}
 #gift-select-style h2 {
 	background-position: 10px -45px;
 }
@@ -62,12 +100,12 @@ h3 {
 #gift-buy-submit h2 {
 	background-position: 10px -345px;
 }
-#gift-buy-count label {
+#gift-buy-count-content {
 	display: inline-block;
 	margin-left: -600px;
 }
-* html #gift-buy-count label {display: inline;}
-*+html #gift-buy-count label {display: inline;}
+* html #gift-buy-count-content {display: inline;}
+*+html #gift-buy-count-content {display: inline;}
 
 #gift-upload-photo div.upload {
 	display: inline-block;
@@ -86,6 +124,8 @@ h3 {
 	width: 160px;
 	text-align: center;
 }
+* html #gift-upload-photo ul.images li{display:inline}
+*+html #gift-upload-photo ul.images li{display:inline}
 #gift-upload-photo ul.images li a {
 	vertical-align: middle;
 }

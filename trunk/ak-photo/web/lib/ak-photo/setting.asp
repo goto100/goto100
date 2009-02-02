@@ -7,6 +7,7 @@ Site.prototype.getSettingDAO = function() {
 		this._settingDAO = new SettingDAO();
 		this._settingDAO.db = this.db;
 		this._settingDAO.table = "site_Setting";
+		this._settingDAO.printPriceTable = "site_PrintPrice";
 	}
 	return this._settingDAO;
 }
@@ -37,6 +38,16 @@ Site.prototype.getSetting = function(name) {
 Site.prototype.setSetting = function(name, value) {
 	var dao = this.getSettingDAO();
 	dao.set(name, value);
+}
+
+Site.prototype.getPrintSizes = function() {
+	var dao = this.getSettingDAO();
+	return dao.getSizes();
+}
+
+Site.prototype.setPrintSizes = function(sizes) {
+	var dao = this.getSettingDAO();
+	dao.saveSizes(sizes);
 }
 
 </script>

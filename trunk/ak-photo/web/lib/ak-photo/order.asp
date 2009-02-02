@@ -23,6 +23,11 @@ Site.prototype.saveOrder = function(order) {
 	return dao.save(order);
 }
 
+Site.prototype.updateOrder = function(order) {
+	var dao = this.getOrderDAO();
+	return dao.update(order);
+}
+
 Site.prototype.deleteOrder = function(id) {
 	var dao = this.getOrderDAO();
 	return dao.del(id);

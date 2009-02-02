@@ -1,8 +1,12 @@
+ul,ol,dl{margin:0;padding:0;}
 #main {
-	padding-bottom: 100px;
+	margin-bottom: 100px;
 }
 h1 {
 	background-color: #FAAA3B;
+}
+form ul li {
+	list-style-type: none;
 }
 ol.navbar {
 	background-color: #F7D9AA;
@@ -15,4 +19,133 @@ ol.steps li {
 	padding-left: 34px;
 	background-image: url(res/orange-steps.png);
 	background-repeat: no-repeat;
+}
+#cart #sidebar {
+	float: right;
+}
+#cart #content {
+	float: left;
+	width: 680px;
+}
+#price {
+	float: right;
+	width: 186px;
+	height: 144px;
+	padding: 41px 10px 10px 14px;
+	background: url(res/index-price.png) no-repeat center center;
+}
+#price h2 {
+	display: none;
+}
+#price img {
+	float: right;
+	margin-top: -26px;
+}
+#price li {
+	list-style-type: none;
+	margin-bottom: 3px;
+	padding: 0 10px;
+	color: #996633;
+	font-size: 13px;
+	line-height: 33px;
+	background-color: #E9E9E9;
+}
+
+#print-uploader {
+	text-align: center;
+}
+#print-uploader ul li {
+	width: 400px;
+	margin: 5px auto;
+	padding: 5px;
+	text-align:center;
+	background-color: #DDD;
+}
+#print-uploader input.submit {
+	padding: 5px 20px;
+}
+
+h2 {
+	font-size: 10.5pt;
+	margin: 5px 0;
+	padding: 5px;
+	color: #000;
+	font-weight: bold;
+	border-left: 5px solid #F90;
+}
+#photos-setting {
+	float: right;
+	margin: 0;
+	padding: 10px;
+	background-color: #EEE;
+}
+#photos-setting h3 {
+	display: inline-block;
+	font-weight: bold;
+}
+* html #photos-setting h3 {display:inline;}
+*+html #photos-setting h3 {display:inline;}
+#photos-setting form {
+	display: inline-block;
+}
+* html #photos-setting form {display:inline;}
+*+html #photos-setting form {display:inline;}
+
+form.photos ul {
+	width: 100%;
+}
+form.photos ul li {
+	display: inline-block;
+	width: 160px;
+	margin: 10px;
+}
+* html form.photos ul li {display: inline;float:left;}
+*+html form.photos ul li {display: inline;float:left;}
+form.photos p.amount {
+	margin: 0 10px;
+	text-align: right;
+	font-size: 10.5pt;
+	font-weight: bold;
+}
+form.photos div.footer p.amount {
+	float: right;
+}
+form.photos input.submit, form.photos button.submit {
+	padding: 5px 20px;
+	float: right;
+}
+
+#delivery-form {
+}
+#delivery-form p {
+	font-size: 10.5pt;
+}
+#delivery-form ul li {
+	padding: 5px;
+	margin: 5px;
+}
+#delivery-form ul li label strong {
+	display: inline-block;
+	width: 200px;
+	margin-right: 0.5em;
+	text-align: right;
+	vertical-align: top;
+}
+* html #delivery-form ul li label strong{display:inline;}
+*+html #delivery-form ul li label strong{display:inline;}
+#delivery-form label.input input, #delivery-form label.textarea textarea {
+	width: 300px;
+}
+#delivery-form input.submit {
+	clear: both;
+	float: right;
+	padding: 5px 20px;
+}
+
+#order-created {
+	width: 300px;
+	margin: 0 auto;
+}
+#cart-gifts {
+	width: 100%;
 }

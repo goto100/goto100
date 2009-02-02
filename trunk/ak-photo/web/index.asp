@@ -23,7 +23,7 @@ page.output = function() {
 				<h2>冲印价格</h2>
 				<a href="#"><img src="res/index-price-more.png" /></a>
 				<ul>
-					<li>5寸 8.89&times;12.7cm&nbsp;&nbsp;0.3元</li>
+					<li>5寸 8.89&times;12.7cm&nbsp;&nbsp;0.4元</li>
 					<li>6寸 10.2&times;15.24cm&nbsp;0.5元</li>
 					<li>7寸 12.7&times;17.78cm&nbsp;0.8元</li>
 					<li>8寸 8.89&times;12.7cm&nbsp;&nbsp;2.0元</li>
@@ -58,6 +58,7 @@ page.output = function() {
 			</div>
 		</div>
 		<div class="box">
+			<div id="promotion-flash"></div>
 			<div id="promotion-help">
 				<ul>
 					<li><a href="#">冲印流程</a></li>
