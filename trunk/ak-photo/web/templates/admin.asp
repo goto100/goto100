@@ -9,12 +9,12 @@ adminTemplate.header = function() {
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>后台管理中心</title>
 
-<script type="text/javascript" src="lib/xslui/base2-dom-fp.js"></script>
-<script type="text/javascript" src="lib/xslui/xslui.js"></script>
-<script type="text/javascript" src="lib/swfobject/swfobject.js"></script>
+<script type="text/javascript" src="../lib/xslui/base2-dom-fp.js"></script>
+<script type="text/javascript" src="../lib/xslui/xslui.js"></script>
+<script type="text/javascript" src="../lib/swfobject/swfobject.js"></script>
 <%
 this.scripts.forEach(function(script) {
-	%><script type="text/javascript" src="script/<%=script%>.js"></script><%
+	%><script type="text/javascript" src="../script/<%=script%>.js"></script><%
 });
 %>
 <link href="../lib/huan/reset.css" rel="stylesheet" type="text/css" />
@@ -54,7 +54,7 @@ adminTemplate.category = function(category) {
 			%><td><%if (category.typeName) {%><a href="?<%=category.id%>"><%=category.typeName%></a><%}%></td>
 			<td><%if (category.styleName) {%><a href="?<%=category.id%>/styles"><%=category.styleName%></a><%}%></td><%}%>
 			<td><a href="?<%=category.id%>/edit">编辑</a></td>
-			<td><form action="category.asp?<%=category.id%>" method="post"><button name="__method__" value="delete">删除</button></form></td>
+			<td><form action="category.asp?<%=category.id%>" method="post"><button type="submit" name="__method__" value="delete">删除</button></form></td>
 			<td><form action="category.asp?<%=category.id%>" method="post"><button name="move" value="up">上移</button></form></td>
 			<td><form action="category.asp?<%=category.id%>" method="post"><button name="move" value="down">下移</button></form></td>
 		</tr><%
