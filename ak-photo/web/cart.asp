@@ -19,12 +19,11 @@ controller.add(null, Action).action = function() {
 	var gifts = getSession("gifts") || [];
 	gifts.amount = getAmount(null, gifts);
 	var delGiftId = parseInt(this.search.get("delgift"));
-	if (delGiftId) {
-		gifts.forEach(function(gift, i) {
-			if (gift.id == delGiftId) gifts.splice(i, 1);
-		});
-		setSession("gifts", gifts);
-	}
+	gifts.forEach(function(gift, i) {
+		if (delGiftId && gift.id == delGiftId) gifts.splice(i, 1);
+		gift.style = site.getCategoryStyle(gift.style.id);
+	});
+	if (delGiftId) setSession("gifts", gifts);
 	cartPage.output(photos, gifts);
 }
 
@@ -81,6 +80,8 @@ controller.add("submit", PostAction).action = function() {
 	var savedOrder = site.saveOrder(order);
 	order.id = savedOrder.id;
 	order.no = savedOrder.no;
+	Session("ordered") = true;
+	Session.Abandon();
 	orderCreatedPage.output(order);
 }
 
@@ -143,6 +144,7 @@ cartPage.output = function(photos, gifts) {
 				<thead>
 					<tr>
 						<th></th>
+						<th>样式</th>
 						<th>数量</th>
 						<th>单价</th>
 						<th>合计</th>
@@ -152,6 +154,7 @@ cartPage.output = function(photos, gifts) {
 				<%gifts.forEach(function(gift) {
 				%><tr>
 					<td><img src="_uploads/category-<%=gift.id%>.jpg" alt="<%=gift.id%>" width="80" /></td>
+					<td><%=gift.style.title%></td>
 					<td><%=gift.count%></td>
 					<td><%=gift.price%></td>
 					<td><%=gift.price * gift.count%></td>
@@ -205,7 +208,6 @@ deliveryFormPage.output = function() {
 	<div id="content">
 		<p style="text-align: right;"><a href="help?5">配送范围</a> | <a href="help?5">配送价格围</a> | <a href="help?5">配送时间</a></p>
 		<form id="delivery-form" action="cart.asp?confirm" method="post">
-			<p>如您所在地不是陕西省安康市汉滨区城区，请直接点击<img src="res/taobao-pay.png" alt="使用淘宝支付" style="vertical-align:middle;" />，将会转到使用淘宝网支付宝系统支付。</p>
 			<p>如您所在地是陕西省安康市汉滨区城区，请认真填写配送信息，我们将提供“送货上门，验货付款”的服务。</p>
 			<ul>
 				<li><label class="address input"><strong>详细配送地址: </strong><input type="text" name="address" value="陕西省安康市汉滨区" size="60" /></label></li>
@@ -215,6 +217,8 @@ deliveryFormPage.output = function() {
 				<li><label class="phone textarea"><strong>其他信息: </strong><textarea name="postscript"></textarea></label></li>
 			</ul>
 			<input class="submit" type="submit" value="提交订单" />
+			<button class="submit" onClick="history.go(-1);return false;">上一步</button>
+			<p>其他地区可直接提交订单，并在最后点击淘宝网支付。</p>
 		</form>
 	</div>
 </div>
@@ -241,7 +245,6 @@ confirmPage.output = function(order) {
 </ol>
 <div id="main">
 	<div id="content">
-		<a href="cart.asp"><img src="res/edit-button.png" alt="修改" /></a>
 		<form class="photos box" action="cart.asp?submit" method="post">
 			<h2>收件人</h2>
 			<input type="hidden" name="name" value="<%=order.delivery.name%>" />
@@ -269,7 +272,7 @@ confirmPage.output = function(order) {
 				</li><%
 				});%>
 			</ul>
-			<%if (photos.amount) {%><p class="amount">照片费用：<%=photos.amount%>元</p><%}%><%}%>
+			<%if (photos.amount) {%><div class="amount">照片费用：<%=photos.amount%>元</div><%}%><%}%>
 			<%if (gifts.length) {%>
 			<h2>影像礼品</h2>
 			<table id="cart-gifts">
@@ -290,13 +293,13 @@ confirmPage.output = function(order) {
 				</tr><%
 				});%>
 			</table>
-			<%if (gifts.amount) {%><p class="amount">礼品费用：<%=gifts.amount%>元</p><%}%><%}%>
+			<%if (gifts.amount) {%><div class="amount">礼品费用：<%=gifts.amount%>元</div><%}%><%}%>
 			<div class="footer">
 				<input class="submit" type="submit" value="提交订单" />
 				<%if (photos.amount || gifts.amount) {%><p class="amount">总费用：<%=photos.amount + gifts.amount%></p><%}%>
 			</div>
 		</form>
-		<a href="cart.asp"><img src="res/edit-button.png" alt="修改" /></a>
+		<button class="previous-step" onClick="location.href = 'cart.asp'">上一步</button>
 	</div>
 </div>
 <%this.show("footer")%>
@@ -327,13 +330,22 @@ orderCreatedPage.output = function(order) {
 			<ul>
 				<li>订单号：<%=order.no%></li>
 				<li>总金额：<%=order.amount%></li>
+				<li>送货地址：<%=order.delivery.address%></li>
+				<li>联系电话：<%=order.delivery.phone%></li>
 			</ul>
-			<p>请您记住订单号，进入淘宝网</p>
-			<p>按照淘宝内提示进行操作</p>
-			<p><img src="res/goto-taobao.png" alt="进入淘宝" /></p>
+			<p>请您记住订单号，稍后我们的工作人员会电话和您做最后确认，并为您提供送货上门服务！</p>
+			<p>如您所在地不处于我们的送货上门地区：陕西省安康市汉滨区城区，
+请进入淘宝网，使用支付宝购买！</p>
+			<p>（有关淘宝网支付宝流程，请参见淘宝网的帮助）</p>
+</p>
+			<p><button class="access" onClick="location.href = 'http://taobao.com'">进入淘宝</button></p>
 		</div>
 	</div>
 </div>
+
+
+
+
 <%this.show("footer")%>
 <%
 }

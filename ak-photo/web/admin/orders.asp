@@ -103,7 +103,7 @@ page.outputOrders = function(orders) {
 				<td><%=order.status == 0? '未处理' : '已发货'%></td>
 				<td><%=order.date.toISOString()%></td>
 				<td><a href="orders.asp?<%=order.id%>/edit">编辑</a></td>
-				<td><form action="orders.asp?<%=order.id%>" method="post"><button name="__method__" value="delete">删除</button></form></td>
+				<td><form action="orders.asp?<%=order.id%>" method="post"><button type="submit" name="__method__" value="delete">删除</button></form></td>
 			</tr><%
 		});
 		%>

@@ -76,7 +76,7 @@ h2 {
 #photos-setting {
 	float: right;
 	margin: 0;
-	padding: 10px;
+	padding: 6px 10px;
 	background-color: #EEE;
 }
 #photos-setting h3 {
@@ -96,16 +96,24 @@ form.photos ul {
 }
 form.photos ul li {
 	display: inline-block;
-	width: 160px;
-	margin: 10px;
+	width: 150px;
+	margin: 5px;
 }
-* html form.photos ul li {display: inline;float:left;}
-*+html form.photos ul li {display: inline;float:left;}
+* html form.photos ul li {display: inline;}
+*+html form.photos ul li {display: inline;}
 form.photos p.amount {
 	margin: 0 10px;
 	text-align: right;
 	font-size: 10.5pt;
 	font-weight: bold;
+}
+form.photos div.amount {
+	margin: 10px 0;
+	text-align: right;
+	font-size: 10.5pt;
+	font-weight: bold;
+	padding:4px;
+	background-color: #EEE;
 }
 form.photos div.footer p.amount {
 	float: right;
@@ -136,15 +144,21 @@ form.photos input.submit, form.photos button.submit {
 #delivery-form label.input input, #delivery-form label.textarea textarea {
 	width: 300px;
 }
-#delivery-form input.submit {
-	clear: both;
+#delivery-form input.submit, #delivery-form button.submit {
 	float: right;
 	padding: 5px 20px;
 }
-
+button.previous-step {
+	padding: 5px 20px;
+}
 #order-created {
 	width: 300px;
 	margin: 0 auto;
+	font-size: 10.5pt;
+	line-height: 1.6em;
+}
+#order-created button.access {
+	padding: 5px 20px;
 }
 #cart-gifts {
 	width: 100%;

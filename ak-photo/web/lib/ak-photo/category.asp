@@ -48,6 +48,10 @@ Site.prototype.moveCategory = function(id, isDown) {
 	dao.move(id, isDown);
 }
 
+Site.prototype.getCategoryStyle = function(id) {
+	var dao = this.getStyleDAO();
+	return dao.get(id);
+}
 
 Site.prototype.saveCategoryStyle = function(style) {
 	var dao = this.getStyleDAO();

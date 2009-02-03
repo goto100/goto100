@@ -17,6 +17,11 @@ StyleDAO.toPojo = function(record) {
 }
 StyleDAO.prototype = new DAO();
 
+StyleDAO.prototype.get = function(id) {
+	var record = this.db.query("SELECT * FROM " + this.table + " WHERE id = " + id, 1);
+	return StyleDAO.toPojo(record);
+}
+
 StyleDAO.prototype.save = function(pojo) {
 	var record = this.db.insert(this.table, StyleDAO.fromPojo(pojo), true);
 	return StyleDAO.toPojo(record);

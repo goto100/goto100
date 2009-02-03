@@ -21,7 +21,7 @@ controller.add(/^\d+?$/ig, Action).action = function() {
 	category.style = category.styles.filter(function(style) {
 		return style.id == styleId;
 	})[0] || category.styles[0];
-	var sessionKey = "gift-" + category.id + "-images";
+	var sessionKey = "gift-" + category.id + category.style.id +  "-images";
 	var images = getSession(sessionKey) || [];
 	var delimg = this.search.get("delimg");
 	if (delimg) {
@@ -41,7 +41,7 @@ controller.add(/^\d+?$/ig, PostAction).action = function() {
 		return style.id == styleId;
 	})[0] || new Style(0);
 	var files = this.input.get("file");
-	var sessionKey = "gift-" + category.id + "-images";
+	var sessionKey = "gift-" + category.id + category.style.id + "-images";
 	var images = getSession(sessionKey) || [];
 	files.forEach(function(file) {
 		var path = UPLOAD_PATH + Session.SessionID + "-" + (new Date()).valueOf() +".jpg";
@@ -54,13 +54,13 @@ controller.add(/^\d+?$/ig, PostAction).action = function() {
 
 controller.add("submit", PostAction).action = function() {
 	var category = site.getCategory(parseInt(this.input.get("id")));
-	var sessionKey = "gift-" + category.id + "-images";
 	var gift = category;
 	gift.count = parseInt(this.input.get("count")),
-	gift.images = getSession(sessionKey) || [];
 	gift.style = new Style(parseInt(this.input.get("style")));
+	var sessionKey = "gift-" + gift.id + gift.style.id + "-images";
+	gift.images = getSession(sessionKey) || [];
 	var gifts = getSession("gifts") || [];
-	gifts.forEach(function(item, i) { if (gift.id == item.id) gifts.splice(i, 1);	});
+	gifts.forEach(function(item, i) { if (gift.id == item.id && gift.style.id == item.style.id) gifts.splice(i, 1);});
 	gifts.push(gift);
 	setSession("gifts", gifts);
 	this.redirect("cart.asp");

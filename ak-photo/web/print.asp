@@ -70,6 +70,9 @@ printPage.output = function() {
 				<li><label>照片: <input type="file" name="file" /></label></li>
 				<li><label>照片: <input type="file" name="file" /></label></li>
 				<li><label>照片: <input type="file" name="file" /></label></li>
+				<li><label>照片: <input type="file" name="file" /></label></li>
+				<li><label>照片: <input type="file" name="file" /></label></li>
+				<li><label>照片: <input type="file" name="file" /></label></li>
 			</ul>
 			<input class="submit" type="submit" value="上传" />
 		</form>
