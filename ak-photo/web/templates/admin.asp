@@ -28,17 +28,24 @@ this.styles.forEach(function(style) {
 </head>
 
 <body id="<%=this.id%>">
-<ul class="menu">
-	<li><a href="orders.asp">订单管理</a></li>
-	<li><a href="category.asp">礼品分类管理</a></li>
-	<li><a href="setting.asp?photosize">照片尺寸</a></li>
-	<li><a href="setting.asp?changepassword">修改密码</a></li>
-</ul>
+<div id="main">
+	<div id="content">
 <%
 }
 
 adminTemplate.footer = function() {
 %>
+	</div>
+	<div id="sidebar" class="aside">
+		<ul class="menu">
+			<li><a href="orders.asp">订单管理</a></li>
+			<li><a href="category.asp">礼品分类管理</a></li>
+			<li><a href="setting.asp?partners">合作伙伴</a></li>
+			<li><a href="setting.asp?photosize">照片尺寸</a></li>
+			<li><a href="setting.asp?changepassword">修改密码</a></li>
+		</ul>
+	</div>
+</div>
 </body>
 </html>
 <%
@@ -46,20 +53,34 @@ adminTemplate.footer = function() {
 
 adminTemplate.category = function(category) {
 	if (!category.length) return;
-	%><table><%
-	category.forEach(function(category) {
-		%><tr>
-			<th><%=category.name%></th>
-			<%if (category.depth == 0) {
-			%><td><%if (category.typeName) {%><a href="?<%=category.id%>"><%=category.typeName%></a><%}%></td>
-			<td><%if (category.styleName) {%><a href="?<%=category.id%>/styles"><%=category.styleName%></a><%}%></td><%}%>
-			<td><a href="?<%=category.id%>/edit">编辑</a></td>
-			<td><form action="category.asp?<%=category.id%>" method="post"><button type="submit" name="__method__" value="delete">删除</button></form></td>
-			<td><form action="category.asp?<%=category.id%>" method="post"><button name="move" value="up">上移</button></form></td>
-			<td><form action="category.asp?<%=category.id%>" method="post"><button name="move" value="down">下移</button></form></td>
-		</tr><%
+	%><table class="datagrid">
+		<thead>
+			<tr>
+				<th>名称</th>
+				<%if (category.depth == 0) {
+				%><th></th>
+				<th></th><%}%>
+				<th>编辑</th>
+				<th>删除</th>
+				<th>上移</th>
+				<th>下移</th>
+			</tr>
+		</thead>
+		<tbody><%
+		category.forEach(function(category) {
+			%><tr>
+				<th><%=category.name%></th>
+				<%if (category.depth == 0) {
+				%><td><%if (category.typeName) {%><a href="?<%=category.id%>"><%=category.typeName%></a><%}%></td>
+				<td><%if (category.styleName) {%><a href="?<%=category.id%>/styles"><%=category.styleName%></a><%}%></td><%}%>
+				<td><a href="?<%=category.id%>/edit">编辑</a></td>
+				<td><form action="category.asp?<%=category.id%>" method="post"><button type="submit" name="__method__" value="delete">删除</button></form></td>
+				<td><form action="category.asp?<%=category.id%>" method="post"><button name="move" value="up">上移</button></form></td>
+				<td><form action="category.asp?<%=category.id%>" method="post"><button name="move" value="down">下移</button></form></td>
+			</tr><%
 	});
-	%></table><%
+	%></tbody>
+	</table><%
 }
 
 adminTemplate.pagebar = function(count, current) {

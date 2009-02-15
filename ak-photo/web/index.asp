@@ -1,12 +1,17 @@
 <!--#include file="common.asp" -->
+<!--#include file="lib/ak-photo/setting.asp" -->
 <!--#include file="templates/default.asp" -->
+<script language="javascript" runat="server">
+var partners = site.getSetting("sitePartners");
+page.output(partners);
+</script>
 <%
 var page = new Page();
 page.template = template;
 page.id = "index";
 page.styles.push("index");
 
-page.output = function() {
+page.output = function(partners) {
 %>
 <%this.show("header")%>
 <div id="main">
@@ -77,19 +82,10 @@ page.output = function() {
 			</div>
 		</div>
 		<div id="partners">
-			<ul>
-				<li><a href="#"><img src="res/partners/color-gl.png" /></a></li>
-				<li><a href="#"><img src="res/partners/cuphoto.png" /></a></li>
-				<li><a href="#"><img src="res/partners/hjwx.png" /></a></li>
-				<li><a href="#"><img src="res/partners/akrc.png" /></a></li>
-				<li><a href="#"><img src="res/partners/ankang.png" /></a></li>
-			</ul>
+			<%=partners%>
 		</div>
 	</div>
 </div>
 <%this.show("footer")%>
 <%}
 %>
-<script language="javascript" runat="server">
-page.output();
-</script>

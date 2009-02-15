@@ -1,5 +1,3 @@
-@import url("../lib/huan/reset.css");
-
 html {
 	background-color: #00A0DE;
 }
@@ -217,3 +215,7 @@ ol.step_4 li.step_4 {
 ol.step_5 li.step_5 {
 	background-position: 0 -450px;
 }
+
+
+
+

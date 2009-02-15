@@ -1,6 +1,7 @@
 body {
 	padding: 10px;
-	background-color: #CCC;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
 }
 table {
 	width: 100%;
@@ -10,4 +11,139 @@ ul.pagebar li {
 	padding: 0 4px;
 }
 ul.menu {margin-bottom:20px;}
-ul.menu li {display:inline-block;}
+ul.menu li {margin: 5px 0;}
+
+#main {position: relative;}
+#content {position: absolute;left:200px;}
+#sidebar {position: absolute;width:200px;}
+
+
+.datagrid {
+	width:100%;
+	clear: both;
+	font-size: 10.5pt;
+}
+.datagrid col.selection {
+	width: 24px;
+}
+.datagrid col.operation {
+	width: 24px;
+}
+.datagrid thead {
+	background-color: #CAE8EA;
+}
+.datagrid thead th {
+	padding: 4px 0;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #467;
+	text-align: center;
+	font-weight: normal;
+	border-top: 1px solid #C1DAD7;
+	border-right: 1px solid #C1DAD7;
+	border-bottom: 1px solid #C1DAD7;
+}
+.datagrid thead th.selection {
+	
+}
+.datagrid thead th.operation {
+	text-indent: -9999px;
+}
+.datagrid tfoot {
+	
+}
+.datagrid tfoot tr {
+	line-height: 24px;
+	background-color: #A3D6DA;
+}
+.datagrid tfoot td {
+	padding-right: 10px;
+	text-align: right;
+	font-family: "Courier New", Courier, monospace;
+	font-weight: bold;
+}
+.datagrid tbody {
+	
+}
+.datagrid tbody tr {
+	line-height: 24px;
+}
+.datagrid tbody tr.even {
+	background-color: #F3F3F3;
+}
+.datagrid tbody tr:hover {
+	background-color: #DCDCDC;
+}
+.datagrid tbody tr.selected {
+	background-color: #DCDCDC;
+}
+.datagrid tbody th,
+.datagrid tbody td {
+	padding: 0 4px;
+	text-align: left;
+	font-weight: normal;
+	border-right: 1px solid #C1DAD7;
+	border-bottom: 1px solid #C1DAD7;
+}
+.datagrid tbody th {
+	background-color: #F6F6F6;
+}
+.datagrid tbody th.selection {
+	text-align: center;
+}
+.datagrid tbody tr.even th {
+	background-color: #F0F0F0;
+}
+.datagrid tbody tr:hover th {
+	background-color: #DCDCDC;
+}
+.datagrid tbody tr.selected th {
+	background-color: #DCDCDC;
+}
+.datagrid tbody th a {
+	display: block;
+	color: #666666;
+}
+.datagrid tbody td.operation {
+	padding: 4px;
+}
+.datagrid tbody td.operation a {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	text-indent: -9999px;
+	background-repeat: no-repeat;
+	background-position: center center;
+	outline: none;
+}
+.datagrid tbody td.add a {
+	background-image: url(res/add.png);
+}
+.datagrid tbody td.edit a {
+	background-image: url(res/pencil.png);
+}
+.datagrid tbody td.recover a {
+	background-image: url(res/tick.png);
+}	
+.datagrid tbody td.delete a {
+	background-image: url(res/cross.png);
+}
+.datagrid tbody td.view a,
+.datagrid tbody td.process a {
+	background-image: url(res/eye.png);
+}
+.datagrid tbody td.statistics a {
+	background-image: url(res/chart_bar.png);
+}
+.datagrid tbody td.moveUp a {
+	background-image: url(res/arrow_up.png);
+}
+.datagrid tbody td.moveDown a {
+	background-image: url(res/arrow_down.png);
+}
+.datagrid tr.enabled td.state a {
+	background-image: url(res/accept.png);
+}
+.datagrid tr.disabled td.state a {
+	background-image: url(res/cancel.png);
+}

@@ -1,4 +1,4 @@
-if (!window.XMLHttpRequest) XMLHttpRequest = {native: false};
+if (!window.XMLHttpRequest) var XMLHttpRequest = {native: false};
 else XMLHttpRequest.native = true;
 
 XMLHttpRequest.create = function() {
@@ -43,7 +43,7 @@ function FileTransferProgress(transferred, size, startTime) {
 function displayProgress() {
 	var interval = 500;
 	var div = document.getElementById("uploadProgressWindowProgress");
-	var filePath = "/ak-photo/_uploads/.upload.xml";
+	var filePath = "_uploads/.upload.xml";
    var request = XMLHttpRequest.create();
 	request.open("GET", filePath, false);
 	request.setRequestHeader("No-Cache", "1");
