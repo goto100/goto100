@@ -61,7 +61,7 @@ page.outputOrder = function(order) {
 	<%if (photos.amount) {%><p class="amount">照片费用：<%=photos.amount%>元</p><%}%><%}%>
 	<%if (gifts.length) {%>
 	<h2>影像礼品</h2>
-	<table id="cart-gifts">
+	<table id="cart-gifts" class="datagrid">
 		<thead>
 			<tr>
 				<th></th>
@@ -93,12 +93,25 @@ page.outputOrders = function(orders) {
 	this.show("header");
 	if (orders) {
 		this.show("pagebar", Math.ceil(orders.total / 10), action.getCurrentPage());
-		%><table><%
+		%><table class="datagrid">
+		<thead>
+			<tr>
+				<th>订单号</th>
+				<th>姓名</th>
+				<th>地址</th>
+				<th>金额</th>
+				<th>状态</th>
+				<th>日期</th>
+				<th>编辑</th>
+				<th>删除</th>
+			</tr>
+		</thead>
+		<%
 		orders.forEach(function(order) {
 			%><tr>
 				<th><%=order.no%></th>
-				<td><%=order.name%></td>
-				<td><%=order.address%></td>
+				<td><%=order.delivery.name%></td>
+				<td><%=order.delivery.address%></td>
 				<td><%=order.amount%></td>
 				<td><%=order.status == 0? '未处理' : '已发货'%></td>
 				<td><%=order.date.toISOString()%></td>

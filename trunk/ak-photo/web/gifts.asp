@@ -20,7 +20,7 @@ controller.add(/^\d+?$/ig, Action).action = function() {
 	var styleId = parseInt(this.search.get("style"));
 	category.style = category.styles.filter(function(style) {
 		return style.id == styleId;
-	})[0] || category.styles[0];
+	})[0] || category.styles[0] || new Style(0);
 	var sessionKey = "gift-" + category.id + category.style.id +  "-images";
 	var images = getSession(sessionKey) || [];
 	var delimg = this.search.get("delimg");
@@ -133,9 +133,9 @@ giftFormPage.output = function(category, count, images) {
 		<div id="gift-description-more">
 			<h3>详细说明:</h3>
 			<p>单价: <strong><%=category.price%>元</strong></p>
-			<%if (category.typeName) {%><label><%=category.typeName%>: <select name="type">
+			<%if (category.typeName) {%><label><%=category.typeName%>: <select name="type" onchange="location.href = 'gifts.asp?' + this.value">
 				<%category.parent.forEach(function(cate) {
-					%><option onClick="location.href = 'gifts.asp?<%=cate.id%>'" value="<%=cate.id%>"<%if (category.id == cate.id) {%> selected="selected"<%}%>><%=cate.name%></option><%
+					%><option value="<%=cate.id%>"<%if (category.id == cate.id) {%> selected="selected"<%}%>><%=cate.name%></option><%
 				})%>
 				</select>
 			</label><%}%>
@@ -151,7 +151,7 @@ giftFormPage.output = function(category, count, images) {
 			<h2>选择<%=category.styleName%></h2>
 			<div class="styles">
 				<%category.styles.forEach(function(style) {%>
-				<label><input type="radio" name="style" value="<%=style.id%>"<%if (category.style && style && category.style.id == style.id) {%>checked="checked"<%}%> onClick="location.href = 'gifts.asp?<%=category.id%>&amp;style=<%=style.id%>&amp;count=<%=count%>'" /><strong><%=style.title%></strong></label>
+				<label><input type="radio" name="style" value="<%=style.id%>"<%if (category.style && style && category.style.id == style.id) {%>checked="checked"<%}%> onclick="location.href = 'gifts.asp?<%=category.id%>&amp;style=<%=style.id%>&amp;count=<%=count%>'" /><strong><%=style.title%></strong></label>
 				<%});%>
 			</div>
 			<%if (category.style && category.style.id) {

@@ -30,6 +30,7 @@ controller.add(null, Action).action = function() {
 controller.add(null, PostAction).action = function() {
 	var photos = getSession("photos") || [];
 	var sizes = this.input.get("size");
+	if (typeof sizes != "array") sizes = [sizes];
 	var counts = this.input.get("count");
 	photos.forEach(function(photo, i) {
 		photo.size = sizes[i];
@@ -333,7 +334,11 @@ orderCreatedPage.output = function(order) {
 				<li>送货地址：<%=order.delivery.address%></li>
 				<li>联系电话：<%=order.delivery.phone%></li>
 			</ul>
+			<br />
 			<p>请您记住订单号，稍后我们的工作人员会电话和您做最后确认，并为您提供送货上门服务！</p>
+			<br />
+			<p><button onclick="window.close();">关闭本页</button></p>
+			<br />
 			<p>如您所在地不处于我们的送货上门地区：陕西省安康市汉滨区城区，
 请进入淘宝网，使用支付宝购买！</p>
 			<p>（有关淘宝网支付宝流程，请参见淘宝网的帮助）</p>

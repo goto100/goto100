@@ -51,6 +51,7 @@ function showAdmin() {
 <ul class="menu">
 	<li><a href="orders.asp">订单管理</a></li>
 	<li><a href="category.asp">礼品分类管理</a></li>
+	<li><a href="setting.asp?partners">合作伙伴</a></li>
 	<li><a href="setting.asp?photosize">照片尺寸</a></li>
 	<li><a href="setting.asp?changepassword">修改密码</a></li>
 </ul>
