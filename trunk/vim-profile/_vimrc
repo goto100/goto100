@@ -88,11 +88,12 @@ function Svnlog()
 endfunction 
 
 command To211 :call To211()
-function! To211()
+function To211()
 	let sfxcl = '"C:\Program Files\VanDyke Software\SecureFX\sfxcl"'
 	let mappings = []
 	let path = expand('%:p')
 	call add(mappings, { 'src': 'D:\works\xn.trunk\www\', 'path': '/opt/www/' } )
+	call add(mappings, { 'src': 'D:\works\xn.static\', 'path': '/opt/static/' } )
 	for mapping in mappings
 		if stridx(path, mapping['src']) == 0
 			let newPath = mapping['path'] . tr(strpart(path, strlen(mapping['src'])), '\', '/')
