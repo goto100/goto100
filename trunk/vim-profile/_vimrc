@@ -74,17 +74,24 @@ endfunction
 command -nargs=1 Svncommit :call Svncommit(<f-args>)
 function Svncommit(msg)
 	w
-	execute '!svn commit -m "' . iconv(a:msg, &enc, "chinese") . '" ' . expand('%:p')
+	execute '!svn commit -m "' . iconv(a:msg, &enc, "chinese") . '" "' . expand('%:p') .'"'
 endfunction
 
 command -nargs=0 Svnupdate :call Svnupdate()
 function Svnupdate()
-	execute '!svn update ' . expand('%:p')
+	execute '!svn update "' . expand('%:p') . '"'
 endfunction
 
 command -nargs=0 Svnlog :call Svnlog()
 function Svnlog()
-	execute '!svn log ' . expand('%:p')
+	execute '!svn log "' . expand('%:p') '"'
+endfunction 
+
+command -nargs=1 To211 :call To211(<f-args>)
+function To211(path)
+	let SRC = 'D:\works\xn.trunk\www\'
+	let PATH = "/opt/www/"
+	execute '!"C:\Program Files\VanDyke Software\SecureFX\sfxcl" /rewrite always ' . expand('%:p') . ' /S /FED ' . a:path
 endfunction 
 
 autocmd BufWritePost,FileWritePost D:/works/xn.static/jspro/xn.core.js silent execute '!D:/works/xn.static/jspro/build.bat &'
