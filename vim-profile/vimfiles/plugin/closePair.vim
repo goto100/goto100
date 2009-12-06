@@ -13,3 +13,4 @@ function ClosePair(char)
 	endif
 endf
 
+

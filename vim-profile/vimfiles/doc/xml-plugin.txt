@@ -201,4 +201,192 @@ for details.
 						Indent
 					</title>
 					<para>
-	
+						The documentation
+					</para>
+				</chapter>
+
+                  
+<LocalLeader>j  Joins two the SAME sections together.               {{{2
+      -  The sections must be next to each other. 
+			<para> This is line 1
+			 of a paragraph. </para>
+			<para> This is line 2
+			|
+			 of a paragraph. </para>
+		\j produces
+			<para> This is line 1
+			 of a paragraph. 
+			 This is line 2
+			 of a paragraph. </para>
+
+<LocalLeader>l  visual surround the block with listitem and para     {{{2 
+				When marking up docbook tekst you have the issue that listitems
+				consist of 2 item. This key combination inserts them both,
+
+        blaah
+          |
+        \l produces
+        <listitem>
+            <para>blaah</para>
+        </listitem>
+    
+<LocalLeader>o  Insert a tag inside the current one (like vim o)     {{{2
+				You are asked for tag and attributes.
+
+        <tag1><tag2><tag3>blaah</tag3></tag2></tag1>
+          |
+        \o produces
+        <tag1>
+            <aftertag><tag2><tag3>blaah</tag3></tag2></aftertag>
+        </tag1>
+    
+<LocalLeader>O  Insert a tag outside the current one (like vim O)     {{{2
+				You are asked for tag and attributes.
+        <tag1><tag2><tag3>blaah</tag3></tag2></tag1>
+          |
+    \O produces
+        <beforetag>
+          <tag1><tag2><tag3>blaah</tag3></tag2></tag1>
+        </beforetag>
+
+<LocalLeader>s  Insert an opening tag for an closing tag.           {{{2
+            list item content</para></listitem>
+            |
+        pressing \s twice produces
+            <para><listitem>list item content</para></listitem>
+
+<LocalLeader>[        Delete <![CDATA[ ]]> delimiters               {{{2
+								Removes Only <CDATA[ and ]]> 
+								handy when you want	to uncomment a section.
+								You need to stand in the tag and not on an other tag
+								<![CDATA[  <tag> ]]>
+								if you  cursor is outside <tag> but inside the
+								CDATA tag the delition works.
+<LocalLeader>{        Delete <![CDATA[ ]]> section                  {{{2
+								Removes everything tag and Content
+<LocalLeader>]        Delete <!-- -->      delimiters               {{{2
+								Uncommnet a block.
+<LocalLeader>}        Delete <!--  -->      section                  {{{2
+								Removes everything tag and Content
+<LocalLeader>>  shift right opening tag and closing tag.           {{{2
+                shift everything between the tags 1 shiftwide right
+<LocalLeader><  shift left opening tag and closing tag.           {{{2
+                shift everything between the tags 1 shiftwide left
+<LocalLeader>c  Visual Place a CDATA section around the selected text.  {{{2
+			Place Cdata section around the block
+<LocalLeader><  Visual Place a Comment around the selected text.  {{{2
+			Place comment around the block
+<LocalLeader>5  Extend the visual selection to the matching tag.  {{{2
+<LocalLeader>%  
+			Extend the visual selection to the matching tag. Make sure you are at
+			the start of the opening tag or the end of the closing tag.
+<LocalLeader>v  Visual Place a tag around the selected text.       {{{2
+        - You are asked for tag and attributes. You
+        need to have selected text in visual mode before you can use this
+        mapping. See |visual-mode| for details.
+        Be careful where you place the marks.
+        The top uses append
+        The bottom uses append
+        Useful when marking up a text file
+
+------------------------------------------------------------------------------
+                                                        *xml-plugin-callbacks*
+
+------------------------------------------------------------------------------
+                                                        *xml-plugin-callbacks*
+
+Callback Functions {{{2 ~
+
+A callback function is a function used to customize features on a per tag
+basis. For example say you wish to have a default set of attributs when you
+type an empty tag like this:
+    You type: <tag>
+    You get:  <tag default="attributes"></tag>
+
+This is for any script programmers who wish to add xml-plugin support to
+there own filetype plugins.
+
+Callback functions recive one attribute variable which is the tag name. The
+all must return either a string or the number zero. If it returns a string
+the plugin will place the string in the proper location. If it is a zero the
+plugin will ignore and continue as if no callback existed.
+
+The following are implemented callback functions:
+
+HtmlAttribCallback
+	This is used to add default attributes to html tag. It is intended
+	for HTML files only.
+
+XmlAttribCallback
+	This is a generic callback for xml tags intended to add attributes.
+
+							     *xml-plugin-html*
+Callback Example {{{2 ~
+
+The following is an example of using XmlAttribCallback in your .vimrc
+>
+        function XmlAttribCallback (xml_tag)
+            if a:xml_tag ==? "my-xml-tag"
+                return "attributes=\"my xml attributes\""
+            else
+                return 0
+            endif
+        endfunction
+<
+The following is a sample html.vim file type plugin you could use:
+>
+  " Vim script file                                       vim600:fdm=marker:
+  " FileType:   HTML
+  " Maintainer: Devin Weaver <vim (at) tritarget.com>
+  " Location:   http://www.vim.org/scripts/script.php?script_id=301
+
+  " This is a wrapper script to add extra html support to xml documents.
+  " Original script can be seen in xml-plugin documentation.
+
+  " Only do this when not done yet for this buffer
+  if exists("b:did_ftplugin")
+    finish
+  endif
+  " Don't set 'b:did_ftplugin = 1' because that is xml.vim's responsability.
+
+  let b:html_mode = 1
+
+  if !exists("*HtmlAttribCallback")
+  function HtmlAttribCallback( xml_tag )
+      if a:xml_tag ==? "table"
+          return "cellpadding=\"0\" cellspacing=\"0\" border=\"0\""
+      elseif a:xml_tag ==? "link"
+          return "href=\"/site.css\" rel=\"StyleSheet\" type=\"text/css\""
+      elseif a:xml_tag ==? "body"
+          return "bgcolor=\"white\""
+      elseif a:xml_tag ==? "frame"
+          return "name=\"NAME\" src=\"/\" scrolling=\"auto\" noresize"
+      elseif a:xml_tag ==? "frameset"
+          return "rows=\"0,*\" cols=\"*,0\" border=\"0\""
+      elseif a:xml_tag ==? "img"
+          return "src=\"\" width=\"0\" height=\"0\" border=\"0\" alt=\"\""
+      elseif a:xml_tag ==? "a"
+          if has("browse")
+	      " Look up a file to fill the href. Used in local relative file
+	      " links. typeing your own href before closing the tag with `>'
+	      " will override this.
+              let cwd = getcwd()
+              let cwd = substitute (cwd, "\\", "/", "g")
+              let href = browse (0, "Link to href...", getcwd(), "")
+              let href = substitute (href, cwd . "/", "", "")
+              let href = substitute (href, " ", "%20", "g")
+          else
+              let href = ""
+          endif
+          return "href=\"" . href . "\""
+      else
+          return 0
+      endif
+  endfunction
+  endif
+
+  " On to loading xml.vim
+  runtime ftplugin/xml.vim
+<
+
+ vim:tw=78:ts=8:fen:fdm=marker:ft=help:norl:
