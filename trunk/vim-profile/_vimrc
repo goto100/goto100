@@ -87,21 +87,23 @@ function Svnlog()
 	execute '!svn log "' . expand('%:p') '"'
 endfunction 
 
-command To211 :call To211()
-function To211()
+command -nargs=1 To :call UploadToServer(<f-args>)
+function UploadToServer(serverName)
 	let sfxcl = '"C:\Program Files\VanDyke Software\SecureFX\sfxcl"'
 	let mappings = []
 	let path = expand('%:p')
 	call add(mappings, { 'src': 'D:\works\xn.trunk\www\', 'path': '/opt/www/' } )
+	call add(mappings, { 'src': 'D:\works\xn.inc\', 'path': '/opt/www/inc/' } )
 	call add(mappings, { 'src': 'D:\works\xn.static\', 'path': '/opt/static/' } )
 	for mapping in mappings
 		if stridx(path, mapping['src']) == 0
 			let newPath = mapping['path'] . tr(strpart(path, strlen(mapping['src'])), '\', '/')
 			echo newPath
-			execute '!' . sfxcl . ' /rewrite always ' . path . ' /S /FED ' . newPath
+			execute '!' . sfxcl . ' /overwrite always ' . path . ' /S /' . a:serverName . ' ' . newPath
 			return
 		endif
 	endfor
+	echo 'no matched path.'
 endfunction 
 
 autocmd BufWritePost,FileWritePost D:/works/xn.static/jspro/xn.core.js silent execute '!D:/works/xn.static/jspro/build.bat &'
