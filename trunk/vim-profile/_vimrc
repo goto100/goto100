@@ -14,7 +14,7 @@ set fileencoding=utf-8
 set fileencodings=utf-8,gb2312,gbk,gb18030,big5
 "set fileencodings+=ucs-bom
 
-colorscheme desert
+colorscheme desertEx
 syn on
 
 " 高亮搜索结果
@@ -64,42 +64,52 @@ set ut=100
 
 au GUIEnter * simalt ~x "Window Maximize
 
-command -nargs=0 Svndiff :call Svndiff()
+command -nargs=0 Diff :call Svndiff()
 function Svndiff()
 "   execute '!svn diff ' . expand('%:p')
 	silent execute '!svn cat ' . expand('%:p') . ' > c:\WINDOWS\Temp\svndiff.tmp'
 	execute ':vert diffsplit c:\WINDOWS\Temp\svndiff.tmp'
 endfunction
 
-command -nargs=1 Svncommit :call Svncommit(<f-args>)
-function Svncommit(msg)
+command -nargs=? Commit :call Svncommit(<f-args>)
+function Svncommit(...)
 	w
-	execute '!svn commit -m "' . iconv(a:msg, &enc, "chinese") . '" "' . expand('%:p') .'"'
+	let command = '!svn commit'
+	if a:0 > 0
+		let command = command . ' -m "' . iconv(a:1, &enc, "chinese") . '"'
+	endif
+	let command = command . ' "' . expand('%:p') .'"'
+	execute command
 endfunction
 
-command -nargs=0 Svnupdate :call Svnupdate()
+command -nargs=0 Update :call Svnupdate()
 function Svnupdate()
 	execute '!svn update "' . expand('%:p') . '"'
 endfunction
 
-command -nargs=0 Svnlog :call Svnlog()
+command -nargs=0 Log :call Svnlog()
 function Svnlog()
 	execute '!svn log "' . expand('%:p') '"'
 endfunction 
 
-command -nargs=1 To :call UploadToServer(<f-args>)
-function UploadToServer(serverName)
+command -nargs=? Upload :call UploadToServer(<f-args>)
+function UploadToServer(...)
 	let sfxcl = '"C:\Program Files\VanDyke Software\SecureFX\sfxcl"'
 	let mappings = []
 	let path = expand('%:p')
-	call add(mappings, { 'src': 'D:\works\xn.trunk\www\', 'path': '/opt/www/' } )
-	call add(mappings, { 'src': 'D:\works\xn.inc\', 'path': '/opt/www/inc/' } )
-	call add(mappings, { 'src': 'D:\works\xn.static\', 'path': '/opt/static/' } )
+	call add(mappings, { 'src': 'D:\works\xn.trunk\src\main\webapp\', 'path': '/opt/www/', 'defaultServerName': 'FED' } )
+	call add(mappings, { 'src': 'D:\works\xn.inc\', 'path': '/opt/www/inc/', 'defaultServerName': 'FED' } )
+	call add(mappings, { 'src': 'D:\works\xn.static\', 'path': '/opt/static/', 'defaultServerName': 'FED'} )
 	for mapping in mappings
 		if stridx(path, mapping['src']) == 0
 			let newPath = mapping['path'] . tr(strpart(path, strlen(mapping['src'])), '\', '/')
+			if a:0 > 0
+				let serverName = a:1
+			else
+				let serverName = mapping['defaultServerName']
+			endif
 			echo newPath
-			execute '!' . sfxcl . ' /overwrite always ' . path . ' /S /' . a:serverName . ' ' . newPath
+			execute '!' . sfxcl . ' /overwrite always ' . path . ' /S /' . serverName . ' ' . newPath
 			return
 		endif
 	endfor
