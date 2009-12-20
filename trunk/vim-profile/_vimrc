@@ -9,12 +9,14 @@ syn on
 
 let $Lang="zh_CN.UTF-8"
 
-set shell=C:/cygwin/bin/bash.exe
-set shellcmdflag=-c
-set shellslash
-set shellredir=>%s\ 2>&1
-set shellpipe=2>&1\|\ tee
-set shellxquote=\"
+if executable('c:/cygwin/bin/bash.exe')
+	set shell=C:/cygwin/bin/bash.exe
+	set shellcmdflag=-c
+	set shellslash
+	set shellredir=>%s\ 2>&1
+	set shellpipe=2>&1\|\ tee
+	set shellxquote=\'
+endif
 set encoding=utf-8
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
