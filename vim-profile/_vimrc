@@ -4,29 +4,31 @@ source $VIMRUNTIME/vimrc_example.vim
 "source $VIMRUNTIME/mswin.vim
 "behave mswin
 
+colorscheme desertEx
+syn on
+
 let $Lang="zh_CN.UTF-8"
 
+set shell=C:/cygwin/bin/bash.exe
+set shellcmdflag=-c
+set shellslash
+set shellredir=>%s\ 2>&1
+set shellpipe=2>&1\|\ tee
+set shellxquote=\"
 set encoding=utf-8
-so $VIMRUNTIME/delmenu.vim
-so $VIMRUNTIME/menu.vim
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
 
 set fileencoding=utf-8
 set fileencodings=utf-8,gb2312,gbk,gb18030,big5
 "set fileencodings+=ucs-bom
 
-colorscheme desertEx
-syn on
-
-" 高亮搜索结果
 set incsearch
 set hlsearch
-
-" 行号
 set number
-
 set linebreak
 set wrap
-set so=1
+set scrolloff=1
 set sidescrolloff=1
 set sidescroll=1
 set makeprg=make
@@ -36,33 +38,28 @@ set fdc=4
 set fdm=syntax
 set cindent
 set autoindent
-set nocompatible
 set smarttab
-set linespace=1
-set fsync
-set nocursorline
-set nocursorcolumn
-set updatecount=819222
-set undolevels=819222
-set history=819222
+set linespace=0
 set nobackup
+set cursorline
 set sessionoptions+=unix,slash
 set fileformat=unix
 set foldmethod=marker
-set modelines=10
 set modeline
 set guifont=Courier_New:h12:cANSI
+set helplang=cn
 
 map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
 map <C-Tab> <Esc>:tabnext<CR>
 map <C-S-Tab> <Esc>:tabprevious<CR>
 map <C-t> <Esc>:tabnew<CR>
 
-highlight CurrentLine guibg=gray25
-au! Cursorhold * exe 'match CurrentLine /\%' . line('.') . 'l.*/'
-set ut=100
+let g:netrw_ignorenetrc = 0
+let g:netrw_cygwin = 1
+let g:netrw_silent = 1
 
-au GUIEnter * simalt ~x "Window Maximize
+let loaded_matchparen = 1 "不加载matchparen插件，避免访问远程文件时移动光标很慢
+
 
 command -nargs=0 Diff :call Svndiff()
 function Svndiff()
@@ -116,8 +113,9 @@ function UploadToServer(...)
 	echo 'no matched path.'
 endfunction 
 
+autocmd GUIEnter * simalt ~x "Window Maximize
+
 autocmd BufWritePost,FileWritePost D:/works/xn.static/jspro/xn.core.js silent execute '!D:/works/xn.static/jspro/build.bat &'
 autocmd BufWritePost,FileWritePost D:/works/xn.static/jspro/xn.ui.js silent execute '!D:/works/xn.static/jspro/build.bat &'
 autocmd BufWritePost,FileWritePost D:/works/xn.static/jspro/xn.form.js silent execute '!D:/works/xn.static/jspro/build.bat &'
 autocmd BufWritePost,FileWritePost D:/works/xn.static/jspro/xn.widgets.js silent execute '!D:/works/xn.static/jspro/build.bat &'
-
