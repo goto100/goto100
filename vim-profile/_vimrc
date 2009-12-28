@@ -29,8 +29,8 @@ set incsearch
 set hlsearch
 set number
 set linebreak
-set wrap
-set scrolloff=1
+set nowrap
+"set scrolloff=1
 set sidescrolloff=1
 set sidescroll=1
 set makeprg=make
