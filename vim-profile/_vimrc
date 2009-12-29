@@ -1,11 +1,10 @@
-"vim: set fenc=utf-8:
 set nocompatible
-source $VIMRUNTIME/vimrc_example.vim
+"source $VIMRUNTIME/vimrc_example.vim
 "source $VIMRUNTIME/mswin.vim
 "behave mswin
 
 colorscheme desertEx
-syn on
+syntax on
 
 let $Lang="zh_CN.UTF-8"
 
@@ -63,6 +62,20 @@ let g:netrw_silent = 1
 let loaded_matchparen = 1 "不加载matchparen插件，避免访问远程文件时移动光标很慢
 
 
+let b:serverMappings = []
+" 定义服务器信息
+call add(b:serverMappings, { 'src': 'D:\works\xn.trunk\src\main\webapp\', 'defaultServerName' : 'FED', 'servers': [
+			\ {'name': 'FED', 'path': '/opt/www/'},
+			\ {'name': '205', 'path': '/home/xiangwei/www/'}
+			\ ]})
+call add(b:serverMappings, { 'src': 'D:\works\xn.inc\', 'defaultServerName' : 'FED', 'servers': [
+			\ {'name': 'FED', 'path': '/opt/www/inc/'},
+			\ {'name': '205', 'path': '/home/xiangwei/www/inc/'}
+			\ ]})
+call add(b:serverMappings, { 'src': 'D:\works\xn.static\', 'defaultServerName' : 'FED', 'servers': [
+			\ {'name': 'FED', 'path': '/opt/static/'},
+			\ ]})
+
 command -nargs=0 Diff :call Svndiff()
 function Svndiff()
 "   execute '!svn diff ' . expand('%:p')
@@ -94,19 +107,21 @@ endfunction
 command -nargs=? Upload :call UploadToServer(<f-args>)
 function UploadToServer(...)
 	let sfxcl = '"C:\Program Files\VanDyke Software\SecureFX\sfxcl"'
-	let mappings = []
 	let path = expand('%:p')
-	call add(mappings, { 'src': 'D:\works\xn.trunk\src\main\webapp\', 'path': '/opt/www/', 'defaultServerName': 'FED' } )
-	call add(mappings, { 'src': 'D:\works\xn.inc\', 'path': '/opt/www/inc/', 'defaultServerName': 'FED' } )
-	call add(mappings, { 'src': 'D:\works\xn.static\', 'path': '/opt/static/', 'defaultServerName': 'FED'} )
-	for mapping in mappings
+
+	for mapping in b:serverMappings
 		if stridx(path, mapping['src']) == 0
-			let newPath = mapping['path'] . tr(strpart(path, strlen(mapping['src'])), '\', '/')
 			if a:0 > 0
 				let serverName = a:1
 			else
 				let serverName = mapping['defaultServerName']
 			endif
+			for server in mapping['servers']
+				if server['name'] == serverName
+					let newPath = server['path'] . tr(strpart(path, strlen(mapping['src'])), '\', '/')
+					break
+				endif
+			endfor
 			echo newPath
 			execute '!' . sfxcl . ' /overwrite always ' . path . ' /S /' . serverName . ' ' . newPath
 			return
@@ -114,6 +129,19 @@ function UploadToServer(...)
 	endfor
 	echo 'no matched path.'
 endfunction 
+
+command -nargs=1 ChangeDefaultServer :call ChangeDefaultServer(<f-args>)
+function ChangeDefaultServer(name)
+	let path = expand('%:p')
+	for mapping in b:serverMappings
+		if stridx(path, mapping['src']) == 0
+			echo 'changed default server name from ' . mapping['defaultServerName'] . ' to ' . a:name
+			let mapping['defaultServerName'] = a:name
+			return
+		endif
+	endfor
+	echo 'no matched path.'
+endfunction
 
 autocmd GUIEnter * simalt ~x "Window Maximize
 
