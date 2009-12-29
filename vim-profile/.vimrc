@@ -56,11 +56,6 @@ set modeline
 set guifont=Courier_New:h12:cANSI
 set helplang=cn
 
-map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
-map <C-Tab> <Esc>:tabnext<CR>
-map <C-S-Tab> <Esc>:tabprevious<CR>
-map <C-t> <Esc>:tabnew<CR>
-
 let g:netrw_ignorenetrc = 0
 let g:netrw_cygwin = 1
 let g:netrw_silent = 1
