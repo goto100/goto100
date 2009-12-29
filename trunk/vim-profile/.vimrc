@@ -7,6 +7,7 @@ set runtimepath^=~/.vim
 
 colorscheme desertEx
 syntax on
+filetype plugin indent on
 
 let $Lang="zh_CN.UTF-8"
 
@@ -26,6 +27,9 @@ set fileencoding=utf-8
 set fileencodings=utf-8,gb2312,gbk,gb18030,big5
 "set fileencodings+=ucs-bom
 
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+
 set incsearch
 set hlsearch
 set number
@@ -42,7 +46,7 @@ set fdm=syntax
 set cindent
 set autoindent
 set smarttab
-set linespace=0
+set linespace=2
 set nobackup
 set cursorline
 set sessionoptions+=unix,slash
@@ -77,6 +81,17 @@ call add(b:serverMappings, { 'src': 'D:\works\xn.inc\', 'defaultServerName' : 'F
 call add(b:serverMappings, { 'src': 'D:\works\xn.static\', 'defaultServerName' : 'FED', 'servers': [
 			\ {'name': 'FED', 'path': '/opt/static/'},
 			\ ]})
+
+
+" When editing a file, always jump to the last known cursor position.
+" Don't do it when the position is invalid or when inside an event handler
+" (happens when dropping a file on gvim).
+" Also don't do it when the mark is in the first line, that is the default
+" position when opening a file.
+autocmd BufReadPost *
+			\ if line("'\"") > 1 && line("'\"") <= line("$") |
+			\   exe "normal! g`\"" |
+			\ endif
 
 command -nargs=0 Diff :call Svndiff()
 function Svndiff()
