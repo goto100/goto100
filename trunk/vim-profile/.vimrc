@@ -55,6 +55,7 @@ set foldmethod=marker
 set modeline
 set guifont=Courier_New:h12:cANSI
 set helplang=cn
+set tags=tags;
 
 "不加载matchparen插件，避免访问远程文件时移动光标很慢
 let g:loaded_matchparen = 1
