@@ -17,7 +17,7 @@ if executable('C:/cygwin/bin/bash.exe')
 	set shellslash
 	set shellredir=>%s\ 2>&1
 	set shellpipe=2>&1\|\ tee
-	set shellxquote=\'
+	"set shellxquote=\'
 endif
 set encoding=utf-8
 source $VIMRUNTIME/delmenu.vim
@@ -73,16 +73,16 @@ let g:Tlist_Use_Right_Window = 0         "在右侧窗口中显示taglist窗口
 let g:Tlist_Show_Menu = 1
 
 " wayne_uploader
-let b:server_mappings = []
-call add(b:server_mappings, { 'src': 'D:\works\xn.trunk\src\main\webapp\', 'defaultServerName' : 'FED', 'servers': [
+let g:server_mappings = []
+call add(g:server_mappings, { 'src': 'D:\works\xn.trunk\src\main\webapp\', 'defaultServerName' : 'FED', 'servers': [
 			\ {'name': 'FED', 'path': '/opt/www/'},
 			\ {'name': '205', 'path': '/home/xiangwei/www/'}
 			\ ]})
-call add(b:server_mappings, { 'src': 'D:\works\xn.inc\', 'defaultServerName' : 'FED', 'servers': [
+call add(g:server_mappings, { 'src': 'D:\works\xn.inc\', 'defaultServerName' : 'FED', 'servers': [
 			\ {'name': 'FED', 'path': '/opt/www/inc/'},
 			\ {'name': '205', 'path': '/home/xiangwei/www/inc/'}
 			\ ]})
-call add(b:server_mappings, { 'src': 'D:\works\xn.static\', 'defaultServerName' : 'FED', 'servers': [
+call add(g:server_mappings, { 'src': 'D:\works\xn.static\', 'defaultServerName' : 'FED', 'servers': [
 			\ {'name': 'FED', 'path': '/opt/static/'},
 			\ ]})
 
