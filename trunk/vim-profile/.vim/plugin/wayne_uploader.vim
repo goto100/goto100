@@ -2,7 +2,7 @@ function UploadToServer(...)
 	let sfxcl = '"C:\Program Files\VanDyke Software\SecureFX\sfxcl"'
 	let path = expand('%:p')
 
-	for mapping in b:server_mappings
+	for mapping in g:server_mappings
 		if stridx(path, mapping['src']) == 0
 			if a:0 > 0
 				let serverName = a:1
@@ -25,7 +25,7 @@ endfunction
 
 function ChangeDefaultServer(name)
 	let path = expand('%:p')
-	for mapping in b:server_mappings
+	for mapping in g:server_mappings
 		if stridx(path, mapping['src']) == 0
 			echo 'changed default server name from ' . mapping['defaultServerName'] . ' to ' . a:name
 			let mapping['defaultServerName'] = a:name
