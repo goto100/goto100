@@ -10,7 +10,7 @@ function Svncommit(...)
 	if a:0 > 0
 		let command = command . ' -m "' . iconv(a:1, &enc, "chinese") . '"'
 	endif
-	let command = command . ' "' . expand('%:p') .'"'
+	let command = command . ' "' . expand('%:p') . '"'
 	execute command
 endfunction
 
