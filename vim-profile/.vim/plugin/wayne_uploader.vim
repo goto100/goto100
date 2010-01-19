@@ -16,6 +16,7 @@ function UploadToServer(...)
 				endif
 			endfor
 			echo newPath
+			w
 			execute '!' . sfxcl . ' /overwrite always ' . path . ' /S /' . serverName . ' ' . newPath
 			return
 		endif
