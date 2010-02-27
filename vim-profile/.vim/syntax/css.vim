@@ -31,7 +31,7 @@ syn keyword cssTagName span strike strong style sub sup tbody td
 syn keyword cssTagName textarea tfoot th thead title tr tt ul u var
 
 " HTML Tags
-syn keyword cssTagName section nav article aside header footer
+syn keyword cssTagName section nav article aside header footer hgroup
 syn keyword cssTagName dialog
 syn keyword cssTagName mark time progress meter ruby rt rp
 syn keyword cssTagName figure video audio source canvas
@@ -48,7 +48,7 @@ syn match cssSelectorOp2 "[~|]\?=" contained
 syn region cssAttributeSelector matchgroup=cssSelectorOp start="\[" end="]" transparent contains=cssUnicodeEscape,cssSelectorOp2,cssStringQ,cssStringQQ
 
 try
-syn match cssIdentifier "#[A-Za-zÀ-ÿ_@][A-Za-zÀ-ÿ0-9_@-]*"
+syn match cssIdentifier "#[A-Za-z?-?_@][A-Za-z?-?0-9_@-]*"
 catch /^.*/
 syn match cssIdentifier "#[A-Za-z_@][A-Za-z0-9_@-]*"
 endtry
