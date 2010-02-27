@@ -54,7 +54,7 @@ syn keyword htmlTagName contained object optgroup q s tbody tfoot thead
 
 " new html 5 tags
 " Sections
-syn keyword htmlTagName contained section nav article aside header footer
+syn keyword htmlTagName contained section nav article aside header footer hgroup
 " Text-level semantics
 syn keyword htmlTagName contained mark time progress meter ruby rt rp
 " Embedded content
