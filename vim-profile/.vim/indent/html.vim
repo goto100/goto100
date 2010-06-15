@@ -106,12 +106,13 @@ call <SID>HtmlIndentPush('dd')
 call <SID>HtmlIndentPush('dt')
 call <SID>HtmlIndentPush('section')
 call <SID>HtmlIndentPush('article')
-call <SID>HtmlIndentPush('details')
 call <SID>HtmlIndentPush('header')
 call <SID>HtmlIndentPush('footer')
 call <SID>HtmlIndentPush('aside')
 call <SID>HtmlIndentPush('figure')
 call <SID>HtmlIndentPush('nav')
+call <SID>HtmlIndentPush('figcaption')
+call <SID>HtmlIndentPush('summary')
 
 delfun <SID>HtmlIndentPush
 

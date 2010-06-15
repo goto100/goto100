@@ -15,7 +15,7 @@ function Svncommit(...)
 endfunction
 
 function Svnupdate()
-	execute '!svn update "' . expand('%:p') . '"'
+	silent execute '!svn update "' . expand('%:p') . '"'
 endfunction
 
 function Svnlog()

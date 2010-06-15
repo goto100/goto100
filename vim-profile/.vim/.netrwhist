@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='D:/works/xn.static/n/core/src/modules/webpager'
+let g:netrw_dirhist_2='D:/works/xn.static/n/core/src/modules/webpager/style'
+let g:netrw_dirhist_3='D:/works/xn.static/n/core/src/layouts'

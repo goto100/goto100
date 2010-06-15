@@ -58,11 +58,11 @@ syn keyword htmlTagName contained section nav article aside header footer hgroup
 " Text-level semantics
 syn keyword htmlTagName contained mark time progress meter ruby rt rp
 " Embedded content
-syn keyword htmlTagName contained figure video audio source canvas
+syn keyword htmlTagName contained figure figcaption video audio source canvas
 " Forms
 syn keyword htmlTagName contained datalist keygen output
 " Interactive elements
-syn keyword htmlTagName contained details command
+syn keyword htmlTagName contained details summary command
 
 " legal arg names
 syn keyword htmlArg contained action
