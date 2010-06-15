@@ -41,8 +41,8 @@ set sidescroll=1
 set makeprg=make
 set tabstop=4
 set shiftwidth=4
-set fdc=4 
-set fdm=syntax
+set foldcolumn=4 
+set foldmethod=syntax
 set cindent
 set autoindent
 set smarttab
@@ -73,17 +73,52 @@ let g:Tlist_Use_Right_Window = 0         "在右侧窗口中显示taglist窗口
 let g:Tlist_Show_Menu = 1
 
 " wayne_uploader
+let g:WUploader_Auto_Upload = 0		" 保存时自动上传
+let g:WUploader_Echo_Info = 1
 let g:server_mappings = []
+
+
+" 主工程
 call add(g:server_mappings, { 'src': 'D:\works\xn.trunk\src\main\webapp\', 'defaultServerName' : 'FED', 'servers': [
 			\ {'name': 'FED', 'path': '/opt/www/'},
+			\ {'name': '30', 'path': '/opt/www/'},
+			\ {'name': '206', 'path': '/opt/www/'},
+			\ {'name': '21ly', 'path': '/opt/www_ly/'},
 			\ {'name': '205', 'path': '/home/xiangwei/www/'}
 			\ ]})
+
+" inc
 call add(g:server_mappings, { 'src': 'D:\works\xn.inc\', 'defaultServerName' : 'FED', 'servers': [
 			\ {'name': 'FED', 'path': '/opt/www/inc/'},
-			\ {'name': '205', 'path': '/home/xiangwei/www/inc/'}
+			\ {'name': '205', 'path': '/home/xiangwei/www/inc/'},
+			\ {'name': '206', 'path': '/home/www/inc/'},
+			\ {'name': '13upload', 'path': '/data/ugc/web/upload/inc/'}
 			\ ]})
+
+" 静态
 call add(g:server_mappings, { 'src': 'D:\works\xn.static\', 'defaultServerName' : 'FED', 'servers': [
 			\ {'name': 'FED', 'path': '/opt/static/'},
+			\ {'name': '206', 'path': '/opt/static/'}
+			\ ]})
+
+" 分享
+call add(g:server_mappings, { 'src': 'D:\works\xn.share\branches\public\xn_share_web\src\main\webapp\', 'defaultServerName' : '13', 'servers': [
+			\ {'name': '13', 'path': '/data/ugc/web/share/'}
+			\ ]})
+
+" 相册
+call add(g:server_mappings, { 'src': 'D:\works\xn.photo\branches\photo17.fed_refact\xn_photo_web\src\main\webapp\', 'defaultServerName' : '13', 'servers': [
+			\ {'name': '13', 'path': '/data/ugc/web/photo/'}
+			\ ]})
+
+" 日志
+call add(g:server_mappings, { 'src': 'D:\works\xn.blog\trunk\xn_blog_web\src\main\webapp\', 'defaultServerName' : '13', 'servers': [
+			\ {'name': '13', 'path': '/data/ugc/web/blog/'}
+			\ ]})
+
+" 状态
+call add(g:server_mappings, { 'src': 'D:\works\xn.status\trunk\xn_status_web\src\main\webapp\', 'defaultServerName' : '13', 'servers': [
+			\ {'name': '13', 'path': '/data/ugc/web/status/'}
 			\ ]})
 
 
@@ -108,5 +143,7 @@ autocmd BufReadPost *
 " Maps
 """""""""""""""""""""
 map <F9> :TlistToggle<cr>
-
+map <F5> :Upload<cr>
+map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<cr>
+map <C-Tab> <Esc>:tabnext<cr>
 
