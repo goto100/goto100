@@ -1,3 +1,9 @@
+function AutoUploadToServer()
+	if g:WUploader_Auto_Upload == 1
+		call UploadToServer()
+	endif
+endfunction
+
 function UploadToServer(...)
 	let sfxcl = '"C:\Program Files\VanDyke Software\SecureFX\sfxcl"'
 	let path = expand('%:p')
@@ -15,13 +21,17 @@ function UploadToServer(...)
 					break
 				endif
 			endfor
-			echo newPath
+			if g:WUploader_Echo_Info == 1
+				echo newPath
+			endif
 			w
-			execute '!' . sfxcl . ' /overwrite always ' . path . ' /S /' . serverName . ' ' . newPath
+			silent execute '!' . sfxcl . ' /overwrite always ' . path . ' /S /' . serverName . ' ' . newPath
 			return
 		endif
 	endfor
-	echo 'no matched path.'
+	if g:WUploader_Echo_Info == 1
+		echo 'no matched path.'
+	endif
 endfunction 
 
 function ChangeDefaultServer(name)
@@ -39,3 +49,5 @@ endfunction
 
 command -nargs=1 ChangeDefaultServer :call ChangeDefaultServer(<f-args>)
 command -nargs=? Upload :call UploadToServer(<f-args>)
+
+autocmd BufWritePost,FileWritePost * call AutoUploadToServer()
