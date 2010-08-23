@@ -1,8 +1,4 @@
 set nocompatible
-"source $VIMRUNTIME/vimrc_example.vim
-"source $VIMRUNTIME/mswin.vim
-"behave mswin
-
 set runtimepath^=~/.vim
 
 colorscheme desertEx
@@ -20,16 +16,22 @@ if executable('C:/cygwin/bin/bash.exe')
 	"set shellxquote=\'
 endif
 set encoding=utf-8
+set langmenu=zh_CN.UTF-8
+language message zh_CN.UTF-8
+
+" 解决gui菜单乱码问题
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 
 set fileencoding=utf-8
 set fileencodings=utf-8,gb2312,gbk,gb18030,big5
 "set fileencodings+=ucs-bom
+set fileformats=unix,dos
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
+set undofile
 set incsearch
 set hlsearch
 set number
@@ -79,16 +81,16 @@ let g:server_mappings = []
 
 
 " 主工程
-call add(g:server_mappings, { 'src': 'D:\works\xn.trunk\src\main\webapp\', 'defaultServerName' : 'FED', 'servers': [
+call add(g:server_mappings, { 'src': 'D:\works\renren\sns.trunk\src\main\webapp\', 'defaultServerName' : 'FED', 'servers': [
 			\ {'name': 'FED', 'path': '/opt/www/'},
 			\ {'name': '30', 'path': '/opt/www/'},
 			\ {'name': '206', 'path': '/opt/www/'},
 			\ {'name': '21ly', 'path': '/opt/www_ly/'},
-			\ {'name': '205', 'path': '/home/xiangwei/www/'}
+			\ {'name': '205', 'path': '/home/qiang.yan/www-trunk/'}
 			\ ]})
 
 " inc
-call add(g:server_mappings, { 'src': 'D:\works\xn.inc\', 'defaultServerName' : 'FED', 'servers': [
+call add(g:server_mappings, { 'src': 'D:\works\renren\xn.inc\', 'defaultServerName' : 'FED', 'servers': [
 			\ {'name': 'FED', 'path': '/opt/www/inc/'},
 			\ {'name': '205', 'path': '/home/xiangwei/www/inc/'},
 			\ {'name': '206', 'path': '/home/www/inc/'},
@@ -96,28 +98,33 @@ call add(g:server_mappings, { 'src': 'D:\works\xn.inc\', 'defaultServerName' : '
 			\ ]})
 
 " 静态
-call add(g:server_mappings, { 'src': 'D:\works\xn.static\', 'defaultServerName' : 'FED', 'servers': [
+call add(g:server_mappings, { 'src': 'D:\works\renren\xn.static\', 'defaultServerName' : 'FED', 'servers': [
 			\ {'name': 'FED', 'path': '/opt/static/'},
 			\ {'name': '206', 'path': '/opt/static/'}
 			\ ]})
 
 " 分享
-call add(g:server_mappings, { 'src': 'D:\works\xn.share\branches\public\xn_share_web\src\main\webapp\', 'defaultServerName' : '13', 'servers': [
+call add(g:server_mappings, { 'src': 'D:\works\renren\ugc.share\branches\new\xn_share_web\src\main\webapp\', 'defaultServerName' : '13', 'servers': [
 			\ {'name': '13', 'path': '/data/ugc/web/share/'}
 			\ ]})
 
 " 相册
-call add(g:server_mappings, { 'src': 'D:\works\xn.photo\branches\photo17.fed_refact\xn_photo_web\src\main\webapp\', 'defaultServerName' : '13', 'servers': [
+call add(g:server_mappings, { 'src': 'D:\works\renren\ugc.photo\branches\photo17.fed_refact\xn_photo_web\src\main\webapp\', 'defaultServerName' : '13', 'servers': [
 			\ {'name': '13', 'path': '/data/ugc/web/photo/'}
 			\ ]})
 
+" 上传
+call add(g:server_mappings, { 'src': 'D:\works\renren\ugc.upload\trunk\xn_upload_web\src\main\webapp\', 'defaultServerName' : '15', 'servers': [
+			\ {'name': '15', 'path': '/data/ugc/web/upload/'}
+			\ ]})
+
 " 日志
-call add(g:server_mappings, { 'src': 'D:\works\xn.blog\trunk\xn_blog_web\src\main\webapp\', 'defaultServerName' : '13', 'servers': [
+call add(g:server_mappings, { 'src': 'D:\works\renren\ugc.blog\trunk\xn_blog_web\src\main\webapp\', 'defaultServerName' : '13', 'servers': [
 			\ {'name': '13', 'path': '/data/ugc/web/blog/'}
 			\ ]})
 
 " 状态
-call add(g:server_mappings, { 'src': 'D:\works\xn.status\trunk\xn_status_web\src\main\webapp\', 'defaultServerName' : '13', 'servers': [
+call add(g:server_mappings, { 'src': 'D:\works\renren\ugc.status\trunk\xn_status_web\src\main\webapp\', 'defaultServerName' : '13', 'servers': [
 			\ {'name': '13', 'path': '/data/ugc/web/status/'}
 			\ ]})
 
