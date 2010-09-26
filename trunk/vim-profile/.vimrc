@@ -44,7 +44,6 @@ set makeprg=make
 set tabstop=4
 set shiftwidth=4
 set foldcolumn=4 
-set foldmethod=syntax
 set cindent
 set autoindent
 set smarttab
@@ -86,7 +85,8 @@ call add(g:server_mappings, { 'src': 'D:\works\renren\sns.trunk\src\main\webapp\
 			\ {'name': '30', 'path': '/opt/www/'},
 			\ {'name': '206', 'path': '/opt/www/'},
 			\ {'name': '21ly', 'path': '/opt/www_ly/'},
-			\ {'name': '205', 'path': '/home/qiang.yan/www-trunk/'}
+			\ {'name': '205', 'path': '/home/qiang.yan/www-trunk/'},
+			\ {'name': '64', 'path': '/opt/xiaonei_main/'}
 			\ ]})
 
 " inc
@@ -94,7 +94,13 @@ call add(g:server_mappings, { 'src': 'D:\works\renren\xn.inc\', 'defaultServerNa
 			\ {'name': 'FED', 'path': '/opt/www/inc/'},
 			\ {'name': '205', 'path': '/home/xiangwei/www/inc/'},
 			\ {'name': '206', 'path': '/home/www/inc/'},
-			\ {'name': '13upload', 'path': '/data/ugc/web/upload/inc/'}
+			\ {'name': '13upload', 'path': '/data/ugc/web/upload/inc/'},
+			\ {'name': '64', 'path': '/opt/xiaonei_main/inc/'}
+			\ ]})
+
+" 新鲜事
+call add(g:server_mappings, { 'src': 'D:\works\renren\newsfeed-tpl\', 'defaultServerName' : '127', 'servers': [
+			\ {'name': '127', 'path': '/data/cwf/tpl2/'}
 			\ ]})
 
 " 静态
