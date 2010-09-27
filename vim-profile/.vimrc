@@ -43,7 +43,10 @@ set sidescroll=1
 set makeprg=make
 set tabstop=4
 set shiftwidth=4
+" 折叠
 set foldcolumn=4 
+set nofoldenable
+" 缩进
 set cindent
 set autoindent
 set smarttab
@@ -52,7 +55,6 @@ set nobackup
 set cursorline
 set sessionoptions+=unix,slash
 set fileformat=unix
-set foldmethod=marker
 set modeline
 set guifont=Courier_New:h12:cANSI
 set helplang=cn
@@ -160,3 +162,5 @@ map <F5> :Upload<cr>
 map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<cr>
 map <C-Tab> <Esc>:tabnext<cr>
 
+" 通过快捷方式打开vim，默认路径在快捷方式所在目录，这个很囧……改成默认在用户目录
+cd ~
