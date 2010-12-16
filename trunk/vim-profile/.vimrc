@@ -31,7 +31,8 @@ set fileformats=unix,dos
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
-set undofile
+" 永久撤销，目录里一堆~un文件
+"set undofile
 set incsearch
 set hlsearch
 set number
@@ -80,6 +81,9 @@ let g:WUploader_Auto_Upload = 0		" 保存时自动上传
 let g:WUploader_Echo_Info = 1
 let g:server_mappings = []
 
+" JavaScript Lint
+let g:jslint_command = 'jsl'
+let g:jslint_command_options = '-nofilelisting -nocontext -conf "c:/Users/wayne/.jsl.conf" -nosummary -nologo -process'
 
 " 主工程
 call add(g:server_mappings, { 'src': 'D:\works\renren\sns.trunk\src\main\webapp\', 'defaultServerName' : 'FED', 'servers': [
@@ -101,8 +105,9 @@ call add(g:server_mappings, { 'src': 'D:\works\renren\xn.inc\', 'defaultServerNa
 			\ ]})
 
 " 新鲜事
-call add(g:server_mappings, { 'src': 'D:\works\renren\newsfeed-tpl\', 'defaultServerName' : '127', 'servers': [
-			\ {'name': '127', 'path': '/data/cwf/tpl2/'}
+call add(g:server_mappings, { 'src': 'D:\works\renren\newsfeed-tpl\', 'defaultServerName' : '138', 'servers': [
+			\ {'name': '127', 'path': '/data/cwf/tpl2/'},
+			\ {'name': '138', 'path': '/data/cwf/tpl2/'}
 			\ ]})
 
 " 静态
@@ -161,6 +166,5 @@ map <F9> :TlistToggle<cr>
 map <F5> :Upload<cr>
 map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<cr>
 map <C-Tab> <Esc>:tabnext<cr>
+map <F10> <Esc>:call JavascriptLint()<cr>
 
-" 通过快捷方式打开vim，默认路径在快捷方式所在目录，这个很囧……改成默认在用户目录
-cd ~
