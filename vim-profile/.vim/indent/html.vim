@@ -1,3 +1,4 @@
+
 " Description:	html indenter
 " Author:	Johannes Zellner <johannes@zellner.org>
 " Last Change:	Mo, 05 Jun 2006 22:32:41 CEST
@@ -7,14 +8,22 @@
 "		g:html_indent_strict_table -- inhibit 'O -' elements
 
 " Only load this indent file when no other was loaded.
-if exists("b:did_indent")
-    finish
+"if exists("b:did_indent")
+    "finish
+"endif
+"let b:did_indent = 1
+
+if exists("g:js_indent") 
+	so g:js_indent
+else 
+	ru! indent/javascript.vim
 endif
-let b:did_indent = 1
+
+echo "Sourcing html indent"
 
 
 " [-- local settings (must come before aborting the script) --]
-setlocal indentexpr=HtmlIndentGet(v:lnum)
+setlocal indentexpr=HtmlIndentGetter(v:lnum)
 setlocal indentkeys=o,O,*<Return>,<>>,{,}
 
 
@@ -76,7 +85,7 @@ call <SID>HtmlIndentPush('noscript')
 call <SID>HtmlIndentPush('object')
 call <SID>HtmlIndentPush('ol')
 call <SID>HtmlIndentPush('optgroup')
-call <SID>HtmlIndentPush('pre')
+" call <SID>HtmlIndentPush('pre')
 call <SID>HtmlIndentPush('q')
 call <SID>HtmlIndentPush('s')
 call <SID>HtmlIndentPush('samp')
@@ -95,24 +104,25 @@ call <SID>HtmlIndentPush('tt')
 call <SID>HtmlIndentPush('u')
 call <SID>HtmlIndentPush('ul')
 call <SID>HtmlIndentPush('var')
-call <SID>HtmlIndentPush('th')
-call <SID>HtmlIndentPush('td')
-call <SID>HtmlIndentPush('tr')
-call <SID>HtmlIndentPush('tfoot')
-call <SID>HtmlIndentPush('thead')
-call <SID>HtmlIndentPush('p')
-call <SID>HtmlIndentPush('li')
-call <SID>HtmlIndentPush('dd')
-call <SID>HtmlIndentPush('dt')
-call <SID>HtmlIndentPush('section')
-call <SID>HtmlIndentPush('article')
-call <SID>HtmlIndentPush('header')
-call <SID>HtmlIndentPush('footer')
-call <SID>HtmlIndentPush('aside')
-call <SID>HtmlIndentPush('figure')
-call <SID>HtmlIndentPush('nav')
-call <SID>HtmlIndentPush('figcaption')
-call <SID>HtmlIndentPush('summary')
+
+
+" [-- <ELEMENT ? O O ...> --]
+if !exists('g:html_indent_strict')
+    call <SID>HtmlIndentPush('body')
+    call <SID>HtmlIndentPush('head')
+    call <SID>HtmlIndentPush('html')
+    call <SID>HtmlIndentPush('tbody')
+endif
+
+
+" [-- <ELEMENT ? O - ...> --]
+if !exists('g:html_indent_strict_table')
+    call <SID>HtmlIndentPush('th')
+    call <SID>HtmlIndentPush('td')
+    call <SID>HtmlIndentPush('tr')
+    call <SID>HtmlIndentPush('tfoot')
+    call <SID>HtmlIndentPush('thead')
+endif
 
 delfun <SID>HtmlIndentPush
 
@@ -167,7 +177,9 @@ fun! <SID>HtmlIndentSum(lnum, style)
     return 0
 endfun
 
-fun! HtmlIndentGet(lnum)
+fun! HtmlIndentGetter(lnum)
+	
+	echo "Grabbing html indent for line: " . a:lnum
     " Find a non-empty line above the current line.
     let lnum = prevnonblank(a:lnum - 1)
 
@@ -190,6 +202,42 @@ fun! HtmlIndentGet(lnum)
 	return -1
     endif
 
+    " [-- special handling for <javascript>: use cindent --]
+    let js = '<script.*type\s*=.*javascript'
+
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " by Tye Zdrojewski <zdro@yahoo.com>, 05 Jun 2006
+    " ZDR: This needs to be an AND (we are 'after the start of the pair' AND
+    "      we are 'before the end of the pair').  Otherwise, indentation
+    "      before the start of the script block will be affected; the end of
+    "      the pair will still match if we are before the beginning of the
+    "      pair.
+    "
+    if   0 < searchpair(js, '', '</script>', 'nWb')
+    \ && 0 < searchpair(js, '', '</script>', 'nW')
+	" we're inside javascript
+	
+	if getline(lnum) !~ js && getline(a:lnum) !~ '</script>'
+	    if restore_ic == 0
+	      setlocal noic
+	    endif	
+		return GetJsIndent(a:lnum)
+	endif
+    endif
+
+    if getline(lnum) =~ '\c</pre>'
+	" line before the current line a:lnum contains
+	" a closing </pre>. --> search for line before
+	" starting <pre> to restore the indent.
+	let preline = prevnonblank(search('\c<pre>', 'bW') - 1)
+	if preline > 0
+	    if restore_ic == 0
+	      setlocal noic
+	    endif
+	    return indent(preline)
+	endif
+    endif
+
     let ind = <SID>HtmlIndentSum(lnum, -1)
     let ind = ind + <SID>HtmlIndentSum(a:lnum, 0)
 
@@ -204,4 +252,3 @@ let &cpo = s:cpo_save
 unlet s:cpo_save
 
 " [-- EOF <runtime>/indent/html.vim --]
-
