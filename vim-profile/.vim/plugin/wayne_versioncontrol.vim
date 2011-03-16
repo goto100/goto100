@@ -1,10 +1,11 @@
-function Svndiff()
+function SvnDiff()
 "   execute '!svn diff ' . expand('%:p')
-	silent execute '!svn cat ' . expand('%:p') . ' > c:\WINDOWS\Temp\svndiff.tmp'
-	execute ':vert diffsplit c:\WINDOWS\Temp\svndiff.tmp'
+	let folder = expand('~') . '\AppData\Local\Temp\'
+	silent execute '!svn cat ' . expand('%:p') . ' > ' . folder . 'svndiff.tmp'
+	execute ':vert diffsplit ' . folder . 'svndiff.tmp'
 endfunction
 
-function Svncommit(...)
+function SvnCommit(...)
 	w
 	let command = '!svn commit'
 	if a:0 > 0
@@ -14,16 +15,21 @@ function Svncommit(...)
 	execute command
 endfunction
 
-function Svnupdate()
+function SvnUpdate()
 	silent execute '!svn update "' . expand('%:p') . '"'
 endfunction
 
-function Svnlog()
+function SvnLog()
 	execute '!svn log "' . expand('%:p') '"'
 endfunction 
 
+function SvnRevert()
+	silent execute '!svn revert "' . expand('%:p') . '"'
+endfunction
 
-command -nargs=0 Diff :call Svndiff()
-command -nargs=? Commit :call Svncommit(<f-args>)
-command -nargs=0 Update :call Svnupdate()
-command -nargs=0 Log :call Svnlog()
+
+command -nargs=0 Diff :call SvnDiff()
+command -nargs=? Commit :call SvnCommit(<f-args>)
+command -nargs=0 Update :call SvnUpdate()
+command -nargs=0 Revert :call SvnRevert()
+command -nargs=0 Log :call SvnLog()
