@@ -57,7 +57,9 @@ set cursorline
 set sessionoptions+=unix,slash
 set fileformat=unix
 set modeline
-set guifont=Courier_New:h12:cANSI
+"set guifont=Courier_New:h12:cANSI
+"set guifont=Fixedsys:h12:cANSI
+set guifont=Monaco:h12:cANSI
 set helplang=cn
 set tags=tags;
 
@@ -80,6 +82,9 @@ let g:Tlist_Show_Menu = 1
 let g:WUploader_Auto_Upload = 0		" 保存时自动上传
 let g:WUploader_Echo_Info = 1
 let g:server_mappings = []
+
+" LookupFile
+let g:LookupFile_TagExpr = '"d:/works/filenametags"'
 
 " JavaScript Lint
 let g:jslint_command = 'jsl'
@@ -111,9 +116,14 @@ call add(g:server_mappings, { 'src': 'D:\works\renren\newsfeed-tpl\', 'defaultSe
 			\ ]})
 
 " 静态
-call add(g:server_mappings, { 'src': 'D:\works\renren\xn.static\', 'defaultServerName' : 'FED', 'servers': [
+call add(g:server_mappings, { 'src': 'D:\works\renren\xn.static\', 'defaultServerName' : '179', 'servers': [
 			\ {'name': 'FED', 'path': '/opt/static/'},
+			\ {'name': '179', 'path': '/home/hualu/renren/rrstatic/'},
 			\ {'name': '206', 'path': '/opt/static/'}
+			\ ]})
+
+call add(g:server_mappings, { 'src': 'D:\works\renren\static\', 'defaultServerName' : '179', 'servers': [
+			\ {'name': '179', 'path': '/home/hualu/renren/static/'}
 			\ ]})
 
 " 分享
@@ -141,17 +151,19 @@ call add(g:server_mappings, { 'src': 'D:\works\renren\ugc.status\trunk\xn_status
 			\ {'name': '13', 'path': '/data/ugc/web/status/'}
 			\ ]})
 
+" 小群组
+call add(g:server_mappings, { 'src': 'D:\works\renren\ugc.minigroup\trunk\xn_minigroup_web\src\main\webapp\', 'defaultServerName' : '59', 'servers': [
+			\ {'name': '206', 'path': '/data/ugc/web/minigroup/'},
+			\ {'name': '13', 'path': '/data/ugc/web/minigroup/'},
+			\ {'name': '59', 'path': '/data/ugc/web/minigroup/'}
+			\ ]})
+
 
 
 """"""""""""""""""""
 " autocmd
 """"""""""""""""""""
 autocmd GUIEnter * simalt ~x "Window Maximize
-
-autocmd BufWritePost,FileWritePost D:/works/xn.static/jspro/xn.core.js silent execute '!D:/works/xn.static/jspro/build.bat &'
-autocmd BufWritePost,FileWritePost D:/works/xn.static/jspro/xn.ui.js silent execute '!D:/works/xn.static/jspro/build.bat &'
-autocmd BufWritePost,FileWritePost D:/works/xn.static/jspro/xn.form.js silent execute '!D:/works/xn.static/jspro/build.bat &'
-autocmd BufWritePost,FileWritePost D:/works/xn.static/jspro/xn.widgets.js silent execute '!D:/works/xn.static/jspro/build.bat &'
 
 autocmd BufReadPost *
 			\ if line("'\"") > 1 && line("'\"") <= line("$") |
@@ -163,7 +175,8 @@ autocmd BufReadPost *
 " Maps
 """""""""""""""""""""
 map <F9> :TlistToggle<cr>
-map <F5> :Upload<cr>
+"map <F5> :Upload<cr> " lookupfile占用
+map <F6> :!D:/works/renren/static/object/trunk/doc.bat<cr>
 map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<cr>
 map <C-Tab> <Esc>:tabnext<cr>
 map <F10> <Esc>:call JavascriptLint()<cr>
