@@ -27,6 +27,28 @@ function SvnRevert()
 	silent execute '!svn revert "' . expand('%:p') . '"'
 endfunction
 
+function HgCommit(...)
+	w
+	let command = '!hg commit'
+	if a:0 > 0
+		let command = command . ' -m "' . iconv(a:1, &enc, "chinese") . '"'
+	endif
+	let command = command . ' "' . expand('%:p') . '"'
+	execute command
+endfunction
+
+function HgUpdate()
+	silent execute '!hg update "' . expand('%:p') . '"'
+endfunction
+
+function HgPull()
+endfunction
+
+function HgPush()
+endfunction
+
+function Commit(...)
+endfunction
 
 command -nargs=0 Diff :call SvnDiff()
 command -nargs=? Commit :call SvnCommit(<f-args>)
