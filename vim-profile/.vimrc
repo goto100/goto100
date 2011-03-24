@@ -85,6 +85,11 @@ let g:server_mappings = []
 
 " LookupFile
 let g:LookupFile_TagExpr = '"d:/works/filenametags"'
+let g:LookupFile_MinPatLength = 2               "最少输入2个字符才开始查找
+let g:LookupFile_PreserveLastPattern = 1        "保存上次查找的字符串
+let g:LookupFile_PreservePatternHistory = 1     "保存查找历史
+let g:LookupFile_AlwaysAcceptFirst = 1          "回车打开第一个匹配项目
+let g:LookupFile_AllowNewFiles = 0              "不允许创建不存在的文件
 
 " JavaScript Lint
 let g:jslint_command = 'jsl'
@@ -180,4 +185,8 @@ map <F6> :!D:/works/renren/static/object/trunk/doc.bat<cr>
 map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<cr>
 map <C-Tab> <Esc>:tabnext<cr>
 map <F10> <Esc>:call JavascriptLint()<cr>
+
+if expand('%:p') == ''
+	cd D:/works
+endif
 

@@ -30,5 +30,3 @@ inoremap <S-Insert> <C-v><C-v>
 inoremap <C-x> <C-v><C-x>
 inoremap <C-z> <C-v><C-z>
 inoremap <C-y> <C-v><C-y>
-
-set guioptions=mTBbr
