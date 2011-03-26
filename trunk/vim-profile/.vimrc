@@ -1,4 +1,4 @@
-﻿set nocompatible
+set nocompatible
 set runtimepath^=~/.vim
 
 colorscheme desertEx
