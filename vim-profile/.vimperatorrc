@@ -7,23 +7,6 @@ noremap <C-Q> <C-z>
 " TODO: this should probably be <C-Break> - see :help dos-CTRL-break in Vim
 noremap <C-s> <C-c>
 
-inoremap <C-q> <C-v>
-inoremap <C-Q> <C-z>
-inoremap <C-s> <C-c>
-
-noremap <C-c> <C-v><C-c>
-noremap <C-v> <C-v><C-v>
-noremap <C-x> <C-v><C-x>
-noremap <C-z> <C-v><C-z>
-noremap <C-y> <C-v><C-y>
-
-cnoremap <C-c> <C-v><C-c>
-cnoremap <C-v> <C-v><C-v>
-cnoremap <S-Insert> <C-v><C-v>
-cnoremap <C-x> <C-v><C-x>
-cnoremap <C-z> <C-v><C-z>
-cnoremap <C-y> <C-v><C-y>
-
 inoremap <C-c> <C-v><C-c>
 inoremap <C-v> <C-v><C-v>
 inoremap <S-Insert> <C-v><C-v>
