@@ -5,7 +5,7 @@ function AutoUploadToServer()
 endfunction
 
 function UploadToServer(...)
-	let sfxcl = '"C:\Program Files\VanDyke Software\SecureFX\sfxcl"'
+	let scp = 'pscp'
 	let path = expand('%:p')
 
 	for mapping in g:server_mappings
@@ -25,7 +25,7 @@ function UploadToServer(...)
 				echo newPath
 			endif
 			w
-			silent execute '!' . sfxcl . ' /overwrite always ' . path . ' /S /' . serverName . ' ' . newPath
+			silent execute '!' . scp . ' ' . path . ' ' . serverName . ':' . newPath
 			return
 		endif
 	endfor
