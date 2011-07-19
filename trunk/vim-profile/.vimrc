@@ -186,7 +186,7 @@ map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<cr>
 map <C-Tab> <Esc>:tabnext<cr>
 map <F10> <Esc>:call JavascriptLint()<cr>
 
-if expand('%:p') == ''
+if expand('%:p') == '' && has('win32')
 	cd D:/works
 endif
 
