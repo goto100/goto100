@@ -48,6 +48,6 @@ endfunction
 
 
 command -nargs=1 ChangeDefaultServer :call ChangeDefaultServer(<f-args>)
-command -nargs=? Upload :call UploadToServer(<f-args>)
+command! -nargs=? Upload :call UploadToServer(<f-args>)
 
 autocmd BufWritePost,FileWritePost * call AutoUploadToServer()
