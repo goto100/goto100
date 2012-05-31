@@ -1,2 +1,29 @@
 [ui]
 username = jingwei.li
+editor = gvim -f
+ignore = ~/.hgignore
+editor = gvim -c "set fileencoding=cp936"
+
+[extensions]
+rebase =
+progress =
+mq =
+eol =
+hgext.graphlog =
+hgext.record =
+hgext.extdiff =
+hgext.convert =
+opm = d:\works\opm\hgext\opm.py
+hggit = d:\works\hg-git\hggit
+#kerberos = d:\works\hg-kerberos\kerberosauth.py
+
+[extdiff]
+cmd.vimdiff = gvim
+opts.vimdiff = --noplugin -d -R
+
+[alias]
+ndiff = diff
+diff = vimdiff
+
+[eol]
+only-consistent = False
