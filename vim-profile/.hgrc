@@ -14,7 +14,7 @@ hgext.record =
 hgext.extdiff =
 hgext.convert =
 opm = d:\works\opm\hgext\opm.py
-hggit = d:\works\hg-git\hggit
+#hggit = d:\works\hg-git\hggit
 #kerberos = d:\works\hg-kerberos\kerberosauth.py
 
 [extdiff]
