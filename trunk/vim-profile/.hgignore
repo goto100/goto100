@@ -1,0 +1,4 @@
+glob:*.swp
+glob:*.pyo
+glob:.template-info
+glob:*.orig
