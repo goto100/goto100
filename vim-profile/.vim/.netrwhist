@@ -1,8 +1,11 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_cnt =9
 let g:netrw_dirhist_1='D:/works/workspace/objectjs.org/object/src/object'
 let g:netrw_dirhist_2='D:/works/workspace/objectjs.org/object/test/unit/loader'
 let g:netrw_dirhist_3='D:/works/workspace/objectjs.org/object/src/object'
 let g:netrw_dirhist_4='D:/works/workspace/objectjs.org/object/test/unit/module'
 let g:netrw_dirhist_5='D:/works/workspace/renren/apps/home2/src/modules'
 let g:netrw_dirhist_6='C:/Users/wayne/.svn/pristine'
+let g:netrw_dirhist_7='D:/works/workspace/objectjs.org/object-ui'
+let g:netrw_dirhist_8='D:/works/workspace/objectjs.org/opm/lib/opm/package/configloader'
+let g:netrw_dirhist_9='C:/Users/yiyu.ljw/.ssh'
