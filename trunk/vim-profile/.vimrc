@@ -166,7 +166,6 @@ autocmd BufReadPost *
 			\   exe "normal! g`\"" |
 			\ endif
 
-
 """""""""""""""""""""
 " Maps
 """""""""""""""""""""
