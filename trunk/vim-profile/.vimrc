@@ -1,7 +1,11 @@
 set nocompatible
 set runtimepath^=~/.vim
 
-colorscheme desertEx
+if has('gui_runing')
+	colorscheme desertEx
+else
+	colorscheme desert
+endif
 syntax on
 filetype plugin indent on
 
