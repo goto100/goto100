@@ -1,0 +1,19 @@
+# Function
+snippet func
+	function ${1:function_name} (${2:arguments}) {
+		${3:// body...}
+	}
+
+# Prototype
+snippet proto
+	${1:class_name}.prototype.${2:method_name} = function(${3:first_argument}) {
+		${4:// body...}
+	};
+
+# Require
+snippet require
+	var ${2:`toupper($1)`} = require('${1:module_name}');
+
+# Exports
+snippet exports
+	exports.$1 = ${1:member_name};
